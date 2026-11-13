@@ -1,0 +1,89 @@
+{
+  "schema_version": 2,
+  "engine_version": "1.4.0",
+  "verification_id": "20261113-145550-946008",
+  "task_id": "20261113-143927-202012-t7-related-session-evidence-export",
+  "run_at": "2026-11-13T06:55:50+00:00",
+  "result": "PASS",
+  "head_sha": "5e52148f528c9d8842a1a22d921af0bc1ecb82f8",
+  "dirty_fingerprint": "c9447b335ab1fe536c42b4efdf1004d3a33dc0d23ef709928da5a15e854589d5",
+  "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+  "planning_sha256": "5a919e57a7cf140a91a916e8139e89a45c85e8f7e21adff6c2da5cb47c68c836",
+  "changed_files": [
+    ".scratch/certificate-admin/issues/T7.md",
+    "README.md",
+    "decisions.md",
+    "docs/acceptance.md",
+    "docs/ai-evidence.md",
+    "docs/delivery.md",
+    "scripts/export_ai_evidence.py",
+    "spec.md",
+    "tasks.md",
+    "tests/test_ai_export.py"
+  ],
+  "unchanged_preexisting_dirty": [],
+  "scope_violations": [],
+  "checks": [
+    {
+      "name": "frontend-types",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 1.237,
+      "output": ""
+    },
+    {
+      "name": "frontend-build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 0.532,
+      "output": "vite v8.3.8 building client environment for production...\ntransforming...\n✓ 52 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                  0.41 kB │ gzip:  0.30 kB\ndist/assets/index-N9UpC4Ly.css   5.58 kB │ gzip:  1.75 kB\ndist/assets/index-B_uNjmyu.js   88.54 kB │ gzip: 33.39 kB\n\n✓ built in 206ms\n"
+    },
+    {
+      "name": "http-contracts",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 16.991,
+      "output": "...............................................                          [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n47 passed, 1 warning in 16.18s\n"
+    },
+    {
+      "name": "startup-smoke",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 46.293,
+      "output": "..............                                                           [100%]\n14 passed in 45.56s\n"
+    }
+  ],
+  "acceptance_coverage": {
+    "status": "covered",
+    "errors": [],
+    "pending": []
+  },
+  "verification_errors": []
+}

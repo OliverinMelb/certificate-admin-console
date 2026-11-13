@@ -1,13 +1,13 @@
 # T7 本地交付清单
 
-T0～T6已完成本地技术验收。T7的文档、交付包和包内启动核对按用户批准执行；完整原始AI活动导出与用户业务验收仍单独跟踪。无远端推送、部署或书面题答案。
+T0～T6已完成本地技术验收。T7的文档、交付包和包内启动核对按用户批准执行；关联AI可见原始条目以固定截止点快照单独交付，用户业务验收仍单独跟踪。无远端推送、部署或书面题答案。
 
 ## 交付组成
 
 - 源码：frontend、backend、scripts、tests，以及项目版本声明和依赖锁文件。
 - 使用说明：README.md；规格与决策：spec.md、tasks.md、decisions.md。
 - 验收入口：docs/acceptance.md及其引用的workflow执行证据、真实浏览器记录和性能结果。
-- AI材料说明：docs/ai-evidence.md。此说明是索引，不是原始对话导出。
+- AI材料说明：docs/ai-evidence.md。此说明是索引；逐条导出作为独立AI证据附件，不混入Git源码包。
 - ZIP内DELIVERY-MANIFEST.json列出每个文件的字节数及SHA-256；ZIP旁的.sha256校验整个压缩包。
 - 排除依赖、构建缓存、运行数据库、.env、原始JSONL会话及其他项目文件。原始PDF继续保留在用户原位置。
 
@@ -28,8 +28,8 @@ T0～T6已完成本地技术验收。T7的文档、交付包和包内启动核�
 从干净提交打包；输出放在已忽略的.smoke目录，每次使用新文件名：
 
 ```powershell
-backend/.venv/Scripts/python.exe scripts/package_delivery.py build .smoke/delivery/certificate-admin-console.zip
-backend/.venv/Scripts/python.exe scripts/package_delivery.py verify .smoke/delivery/certificate-admin-console.zip
+backend/.venv/Scripts/python.exe scripts/package_delivery.py build .smoke/delivery/certificate-admin-console-t7-source.zip
+backend/.venv/Scripts/python.exe scripts/package_delivery.py verify .smoke/delivery/certificate-admin-console-t7-source.zip
 ```
 
 预提交验证可加 `--working-tree`，清单会明确标为未提交快照。最终包从干净提交重建，不将预提交快照冒充提交产物。校验和提供完整性检查，不提供签名或来源认证。
@@ -40,4 +40,26 @@ backend/.venv/Scripts/python.exe scripts/package_delivery.py verify .smoke/deliv
 
 本轮仅文档与独立打包脚本；不改变接口、数据库、身份、依赖锁文件、运行时或前端行为。回退本轮提交即可移除交付工具，不影响已有用户数据库。
 
-已知限制见README及docs/acceptance.md。仅Windows实测；完整原始AI导出尚待补齐，T7不能标为完整考试交付已完成；用户业务验收未被技术检查替代。
+已知限制见README及docs/acceptance.md。仅Windows实测；T7可交付AI条目覆盖范围、过滤与截止点见AI证据说明；不宣称内部原始日志或完整考试交付；用户业务验收未被技术检查替代。
+
+## AI证据附件
+
+最终本地交付由源码ZIP、AI证据ZIP、各自SHA-256及总清单组成。AI附件含transcripts、dispositions、manifest及其校验值；从原日志提取并逐条校验，不纳入Git。源码清单的original_ai_export_complete=false专指源码ZIP不含逐字节内部日志，并不表示另附的可见记录快照缺失。
+
+## 本地组合包复现（PowerShell）
+
+先按上文生成源码ZIP，并按AI说明导出/验证一个新目录。以下命令从项目根目录运行，文件名不得与已有交付覆盖；当前实际交付使用ai-evidence-final与certificate-admin-console-t7-source.zip：
+
+```powershell
+# 前置：已生成并验证 .smoke/delivery/ai-evidence-final
+backend/.venv/Scripts/python.exe -m zipfile -c .smoke/delivery/certificate-admin-console-t7-ai.zip .smoke/delivery/ai-evidence-final
+$sourceZip = '.smoke/delivery/certificate-admin-console-t7-source.zip'
+$aiZip = '.smoke/delivery/certificate-admin-console-t7-ai.zip'
+$sourceHash = (Get-FileHash -LiteralPath $sourceZip -Algorithm SHA256).Hash.ToLowerInvariant()
+$aiHash = (Get-FileHash -LiteralPath $aiZip -Algorithm SHA256).Hash.ToLowerInvariant()
+$aiHash + '  ' + (Split-Path $aiZip -Leaf) | Set-Content -LiteralPath ($aiZip + '.sha256') -Encoding ascii
+[ordered]@{ source_commit = (git rev-parse HEAD); source_zip = (Split-Path $sourceZip -Leaf); source_sha256 = $sourceHash; ai_zip = (Split-Path $aiZip -Leaf); ai_sha256 = $aiHash; scope = 'visible records at manifest byte cutoffs; internal records excluded' } | ConvertTo-Json | Set-Content .smoke/delivery/t7-delivery-manifest.json -Encoding UTF8
+backend/.venv/Scripts/python.exe -m zipfile -c .smoke/delivery/certificate-admin-console-t7-complete.zip .smoke/delivery/certificate-admin-console-t7-source.zip .smoke/delivery/certificate-admin-console-t7-source.zip.sha256 .smoke/delivery/certificate-admin-console-t7-ai.zip .smoke/delivery/certificate-admin-console-t7-ai.zip.sha256 .smoke/delivery/t7-delivery-manifest.json
+```
+
+解压组合包，先将两个ZIP的Get-FileHash值与总清单比对。源码ZIP使用package_delivery.py verify；AI ZIP解压到新目录后，使用export_ai_evidence.py verify --output指向其中的ai-evidence-final目录，若有原始sessions可加--sessions做来源回放验证。源码和AI附件必须分别验证，不能只依赖ZIP文件名。

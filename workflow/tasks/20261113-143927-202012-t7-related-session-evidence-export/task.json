@@ -1,0 +1,230 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-143927-202012-t7-related-session-evidence-export",
+  "title": "T7 related session evidence export",
+  "tier": "small",
+  "workflow_class": "app-change",
+  "state": "CLOSED",
+  "created_at": "2026-11-13T06:39:27+00:00",
+  "updated_at": "2026-11-13T06:56:14+00:00",
+  "workspace": {
+    "kind": "linked-worktree",
+    "branch": null,
+    "detached": true,
+    "head_sha": "5e52148f528c9d8842a1a22d921af0bc1ecb82f8",
+    "dirty_fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "dirty_entries": [],
+    "base_sha": "5e52148f528c9d8842a1a22d921af0bc1ecb82f8"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch/certificate-admin/issues/T7.md",
+      "decisions.md",
+      "docs",
+      "README.md",
+      "scripts",
+      "spec.md",
+      "tasks.md",
+      "tests/test_ai_export.py",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [],
+    "source_refs": [
+      "docs/ai-evidence.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": []
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "User explicitly requests completion of related original-session and subagent evidence under already approved T7 artifact boundaries; local documentation/scripts commit remains authorized, no push. Export faithful visible records with provenance, omission ledger, and fixed snapshot cutoff; never export hidden reasoning/system instructions or fabricate missing history."
+    ],
+    "acceptance_criteria": [
+      "Export manifest hashes, original-prefix provenance, per-line disposition, credential redaction and tamper rejection are checked through CLI/artifact boundary.",
+      "Related root, fork and child logs are discovered transitively and public transcript records preserve source line/order with declared filtering.",
+      "T7 docs distinguish completed cutoff evidence delivery from byte-for-byte internal logs, later messages and business acceptance."
+    ],
+    "spec_ref": null,
+    "multi_session": false,
+    "tickets": []
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 1,
+    "verification_attempts": 3
+  },
+  "verification": {
+    "latest": {
+      "result": "PASS",
+      "verification_id": "20261113-145550-946008",
+      "head_sha": "5e52148f528c9d8842a1a22d921af0bc1ecb82f8",
+      "dirty_fingerprint": "c9447b335ab1fe536c42b4efdf1004d3a33dc0d23ef709928da5a15e854589d5",
+      "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+      "planning_sha256": "5a919e57a7cf140a91a916e8139e89a45c85e8f7e21adff6c2da5cb47c68c836",
+      "evidence": "workflow/tasks/20261113-143927-202012-t7-related-session-evidence-export/verification/20261113-145550-946008.md",
+      "acceptance_coverage": {
+        "status": "covered",
+        "errors": [],
+        "pending": []
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "AC-1": {
+      "criterion": "Export manifest hashes, original-prefix provenance, per-line disposition, credential redaction and tamper rejection are checked through CLI/artifact boundary.",
+      "implementation_refs": [
+        "scripts/export_ai_evidence.py",
+        "tests/test_ai_export.py"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-2": {
+      "criterion": "Related root, fork and child logs are discovered transitively and public transcript records preserve source line/order with declared filtering.",
+      "implementation_refs": [
+        "scripts/export_ai_evidence.py",
+        "tests/test_ai_export.py"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-3": {
+      "criterion": "T7 docs distinguish completed cutoff evidence delivery from byte-for-byte internal logs, later messages and business acceptance.",
+      "implementation_refs": [
+        "docs/ai-evidence.md",
+        "docs/delivery.md"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    }
+  },
+  "delivery": {
+    "status": "pending-acceptance"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T06:39:27+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T06:39:59+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [],
+        "decisions": [
+          "User explicitly requests completion of related original-session and subagent evidence under already approved T7 artifact boundaries; local documentation/scripts commit remains authorized, no push. Export faithful visible records with provenance, omission ledger, and fixed snapshot cutoff; never export hidden reasoning/system instructions or fabricate missing history."
+        ],
+        "acceptance": [
+          "Export manifest hashes, original-prefix provenance, per-line disposition, credential redaction and tamper rejection are checked through CLI/artifact boundary.",
+          "Related root, fork and child logs are discovered transitively and public transcript records preserve source line/order with declared filtering.",
+          "T7 docs distinguish completed cutoff evidence delivery from byte-for-byte internal logs, later messages and business acceptance."
+        ],
+        "spec_ref": null,
+        "multi_session": false,
+        "grilling_status": "confirmed"
+      }
+    },
+    {
+      "at": "2026-11-13T06:39:59+00:00",
+      "event": "TRANSITION",
+      "details": {
+        "to": "EXECUTE",
+        "note": null
+      }
+    },
+    {
+      "at": "2026-11-13T06:46:47+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T06:46:47+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T06:46:48+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-3"
+      }
+    },
+    {
+      "at": "2026-11-13T06:47:59+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-143927-202012-t7-related-session-evidence-export\\verification\\20261113-144759-279917.md"
+      }
+    },
+    {
+      "at": "2026-11-13T06:49:21+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "fix",
+        "finding": "Verify source-derived ledger and lineage, record nested omissions, exclude runtime agent_message, align roadmap and document reproducible bundle commands."
+      }
+    },
+    {
+      "at": "2026-11-13T06:53:18+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-143927-202012-t7-related-session-evidence-export\\verification\\20261113-145318-669776.md"
+      }
+    },
+    {
+      "at": "2026-11-13T06:55:50+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-143927-202012-t7-related-session-evidence-export\\verification\\20261113-145550-946008.md"
+      }
+    },
+    {
+      "at": "2026-11-13T06:56:12+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "pass",
+        "finding": null
+      }
+    },
+    {
+      "at": "2026-11-13T06:56:13+00:00",
+      "event": "DELIVERY_RECORDED",
+      "details": {
+        "status": "pending-acceptance"
+      }
+    },
+    {
+      "at": "2026-11-13T06:56:14+00:00",
+      "event": "CLOSED",
+      "details": {
+        "summary": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-143927-202012-t7-related-session-evidence-export\\summary.md"
+      }
+    }
+  ]
+}
