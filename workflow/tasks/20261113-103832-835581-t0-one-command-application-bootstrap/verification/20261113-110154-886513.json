@@ -1,0 +1,124 @@
+{
+  "schema_version": 2,
+  "engine_version": "1.4.0",
+  "verification_id": "20261113-110154-886513",
+  "task_id": "20261113-103832-835581-t0-one-command-application-bootstrap",
+  "run_at": "2026-11-13T03:01:54+00:00",
+  "result": "PASS",
+  "head_sha": "<unborn>",
+  "dirty_fingerprint": "b0dd2a1cea3a0c0d488587f7032dd2dec7e20f7b5f97a268deb63957668ce084",
+  "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+  "planning_sha256": "1788416ee01fc8e17ab2e04b98e5084288f498911f57ea1a5d605b44f40d65e7",
+  "changed_files": [
+    ".gitignore",
+    ".node-version",
+    ".python-version",
+    ".scratch/certificate-admin/T1-proposal.md",
+    ".scratch/certificate-admin/issues/T0.md",
+    ".scratch/certificate-admin/issues/T1.md",
+    ".scratch/certificate-admin/issues/T2.md",
+    ".scratch/certificate-admin/issues/T3.md",
+    ".scratch/certificate-admin/issues/T4.md",
+    ".scratch/certificate-admin/issues/T5.md",
+    ".scratch/certificate-admin/issues/T6.md",
+    ".scratch/certificate-admin/issues/T7.md",
+    ".scratch/certificate-admin/spec.md",
+    "AGENTS.md",
+    "README.md",
+    "backend/app/__init__.py",
+    "backend/app/main.py",
+    "backend/app/serve.py",
+    "backend/pyproject.toml",
+    "backend/tests/test_http.py",
+    "backend/uv.lock",
+    "decisions.md",
+    "frontend/index.html",
+    "frontend/package-lock.json",
+    "frontend/package.json",
+    "frontend/src/App.vue",
+    "frontend/src/components/ServiceStatus.vue",
+    "frontend/src/main.ts",
+    "frontend/src/style.css",
+    "frontend/tsconfig.json",
+    "frontend/vite.config.ts",
+    "scripts/check.mjs",
+    "scripts/runtime.mjs",
+    "scripts/start.mjs",
+    "tasks.md",
+    "tests/test_startup.py",
+    "workflow/config.json",
+    "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/planning.md",
+    "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/spec.md",
+    "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/task.json"
+  ],
+  "unchanged_preexisting_dirty": [
+    "docs/agents/domain.md",
+    "docs/agents/issue-tracker.md",
+    "spec.md",
+    "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/brief.md"
+  ],
+  "scope_violations": [],
+  "checks": [
+    {
+      "name": "frontend-types",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "dir": "C:\\Users\\admin\\Desktop\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 0.944,
+      "output": ""
+    },
+    {
+      "name": "frontend-build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "dir": "C:\\Users\\admin\\Desktop\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 0.454,
+      "output": "vite v8.3.8 building client environment for production...\ntransforming...\n✓ 17 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                  0.40 kB │ gzip:  0.29 kB\ndist/assets/index-BAb0kp4c.css   1.21 kB │ gzip:  0.59 kB\ndist/assets/index-DjRsci3Y.js   64.87 kB │ gzip: 25.84 kB\n\n✓ built in 112ms\n"
+    },
+    {
+      "name": "http-contracts",
+      "command": [
+        "C:\\Users\\admin\\Desktop\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\Desktop\\certificate-admin-console\\backend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 1.258,
+      "output": "...                                                                      [100%]\n3 passed in 0.49s\n"
+    },
+    {
+      "name": "startup-smoke",
+      "command": [
+        "C:\\Users\\admin\\Desktop\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\Desktop\\certificate-admin-console",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 33.685,
+      "output": "....                                                                     [100%]\n4 passed in 32.97s\n"
+    }
+  ],
+  "acceptance_coverage": {
+    "status": "covered",
+    "errors": [],
+    "pending": []
+  },
+  "verification_errors": []
+}

@@ -1,0 +1,362 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-103832-835581-t0-one-command-application-bootstrap",
+  "title": "T0 One-command application bootstrap",
+  "tier": "contract",
+  "workflow_class": "app-change",
+  "state": "CLOSED",
+  "created_at": "2026-11-13T02:38:33+00:00",
+  "updated_at": "2026-11-13T03:02:26+00:00",
+  "workspace": {
+    "kind": "main-checkout",
+    "branch": "main",
+    "detached": false,
+    "head_sha": "<unborn>",
+    "dirty_fingerprint": "4915e373d91b7d49d7b65b037066cdf9234838e25cef54f3146405bb86c7948b",
+    "dirty_entries": [
+      {
+        "status": "??",
+        "path": "AGENTS.md",
+        "hash": "aa62d5d72906e6f572254de939e2c150d433ef3daf218df17fdef17ab18c3b12"
+      },
+      {
+        "status": "??",
+        "path": "README.md",
+        "hash": "727c12684cdd88c8bb48ad5e112a5caf67627e53f915c2c572308cfe010c784f"
+      },
+      {
+        "status": "??",
+        "path": "decisions.md",
+        "hash": "5664a05a1943b0e9fe0b55aea277d109606b7e644e53b34d51f89f4d83605e6a"
+      },
+      {
+        "status": "??",
+        "path": "docs/agents/domain.md",
+        "hash": "8fcd1a12ea3b928dbc76ed85cbb03f2058a4d98b0e754f33f17534c24cd8cce6"
+      },
+      {
+        "status": "??",
+        "path": "docs/agents/issue-tracker.md",
+        "hash": "7c79eccc26290e75c734377176a9ee32f90fca950d3cd42ce5dd4714c94aad41"
+      },
+      {
+        "status": "??",
+        "path": "spec.md",
+        "hash": "b2be208a6d6214a3a6ffc58be43efe9b793f777ce30b02b7d58bee43352fc614"
+      },
+      {
+        "status": "??",
+        "path": "tasks.md",
+        "hash": "d786eaac0ba7d9313bd4d3b8dd3d405f910ada87083bb1478eb93aec2a92dfd0"
+      },
+      {
+        "status": "??",
+        "path": "workflow/config.json",
+        "hash": "38995ddca8d2c9963d9193a8ebaa95a5cdf1c755f7119eb457c6d5ddce327a4b"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/brief.md",
+        "hash": "89802226bd29ce1c795ef7a0dd1b4ea0ec7cda6c7012bc471cec6b85b2533460"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/planning.md",
+        "hash": "9e9d784ede73ad72571c32a561e113faac02274fb8af93be8f460011087e8bc1"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/task.json",
+        "hash": "874d175e3d3c20e58cdc1954356332ebef5b618a2d6b35242811dc90a41c18d2"
+      }
+    ],
+    "base_sha": "<unborn>"
+  },
+  "scope": {
+    "owned_paths": [
+      ".gitignore",
+      ".node-version",
+      ".python-version",
+      ".scratch",
+      "backend",
+      "decisions.md",
+      "frontend",
+      "package.json",
+      "README.md",
+      "scripts",
+      "tasks.md",
+      "tests",
+      "workflow",
+      "AGENTS.md"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [
+      "grilling",
+      "tdd"
+    ],
+    "source_refs": [
+      "tasks.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": []
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "User explicitly confirmed T0 technical proposal and test boundaries; T1 requires a separate confirmation."
+    ],
+    "acceptance_criteria": [
+      "T0-AC1: health JSON and unknown API 404 through HTTP.",
+      "T0-AC2: frontend type check, build, root page and static resources.",
+      "T0-AC3: clean isolated copy starts from one documented command.",
+      "T0-AC4: shutdown, restart and occupied-port behavior preserve unrelated processes.",
+      "T0-AC5: actual browser shows success and request failure states.",
+      "T0-AC6: project isolation and unchanged lockfiles during startup."
+    ],
+    "spec_ref": "workflow/tasks/20261113-103832-835581-t0-one-command-application-bootstrap/spec.md",
+    "multi_session": false,
+    "tickets": []
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 0,
+    "verification_attempts": 2
+  },
+  "verification": {
+    "latest": {
+      "result": "PASS",
+      "verification_id": "20261113-110154-886513",
+      "head_sha": "<unborn>",
+      "dirty_fingerprint": "b0dd2a1cea3a0c0d488587f7032dd2dec7e20f7b5f97a268deb63957668ce084",
+      "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+      "planning_sha256": "1788416ee01fc8e17ab2e04b98e5084288f498911f57ea1a5d605b44f40d65e7",
+      "evidence": "workflow/tasks/20261113-103832-835581-t0-one-command-application-bootstrap/verification/20261113-110154-886513.md",
+      "acceptance_coverage": {
+        "status": "covered",
+        "errors": [],
+        "pending": []
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "AC-1": {
+      "criterion": "T0-AC1: health JSON and unknown API 404 through HTTP.",
+      "implementation_refs": [
+        "backend/app/main.py"
+      ],
+      "check_refs": [
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-3": {
+      "criterion": "T0-AC3: clean isolated copy starts from one documented command.",
+      "implementation_refs": [
+        "scripts/start.mjs"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-4": {
+      "criterion": "T0-AC4: shutdown, restart and occupied-port behavior preserve unrelated processes.",
+      "implementation_refs": [
+        "scripts/runtime.mjs",
+        "backend/app/serve.py"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-5": {
+      "criterion": "T0-AC5: actual browser shows success and request failure states.",
+      "implementation_refs": [
+        "frontend/src/components/ServiceStatus.vue",
+        "workflow/tasks/20261113-103832-835581-t0-one-command-application-bootstrap/evidence/tdd-and-browser.md"
+      ],
+      "check_refs": [
+        "frontend-build",
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-6": {
+      "criterion": "T0-AC6: project isolation and unchanged lockfiles during startup.",
+      "implementation_refs": [
+        "scripts/runtime.mjs",
+        ".gitignore"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-2": {
+      "criterion": "T0-AC2: frontend type check, build, root page and static resources.",
+      "implementation_refs": [
+        "frontend/src/App.vue",
+        "backend/app/main.py"
+      ],
+      "check_refs": [
+        "frontend-types",
+        "frontend-build",
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    }
+  },
+  "delivery": {
+    "status": "pending-acceptance"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T02:38:33+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T02:40:50+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": null,
+        "opened": [
+          "Confirm the T0 technical proposal and public test boundaries in its spec."
+        ],
+        "resolved": [],
+        "decisions": [],
+        "acceptance": [
+          "T0-AC1: health JSON and unknown API 404 through HTTP.",
+          "T0-AC2: frontend type check, build, root page and static resources.",
+          "T0-AC3: clean isolated copy starts from one documented command.",
+          "T0-AC4: shutdown, restart and occupied-port behavior preserve unrelated processes.",
+          "T0-AC5: actual browser shows success and request failure states.",
+          "T0-AC6: project isolation and unchanged lockfiles during startup."
+        ],
+        "spec_ref": "workflow/tasks/20261113-103832-835581-t0-one-command-application-bootstrap/spec.md",
+        "multi_session": false,
+        "grilling_status": "pending"
+      }
+    },
+    {
+      "at": "2026-11-13T02:47:15+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [
+          "Confirm the T0 technical proposal and public test boundaries in its spec."
+        ],
+        "decisions": [
+          "User explicitly confirmed T0 technical proposal and test boundaries; T1 requires a separate confirmation."
+        ],
+        "acceptance": [],
+        "spec_ref": "workflow/tasks/20261113-103832-835581-t0-one-command-application-bootstrap/spec.md",
+        "multi_session": false,
+        "grilling_status": "confirmed"
+      }
+    },
+    {
+      "at": "2026-11-13T02:47:15+00:00",
+      "event": "TRANSITION",
+      "details": {
+        "to": "EXECUTE",
+        "note": null
+      }
+    },
+    {
+      "at": "2026-11-13T02:59:03.653411+00:00",
+      "event": "SCOPE_METADATA_CORRECTED",
+      "details": "Include approved AGENTS.md conventions written after packet creation; no implementation scope expansion, no gate or evidence override."
+    },
+    {
+      "at": "2026-11-13T02:59:47+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T02:59:48+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-3"
+      }
+    },
+    {
+      "at": "2026-11-13T02:59:49+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-4"
+      }
+    },
+    {
+      "at": "2026-11-13T02:59:50+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-5"
+      }
+    },
+    {
+      "at": "2026-11-13T02:59:50+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-6"
+      }
+    },
+    {
+      "at": "2026-11-13T03:00:25+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "FAIL",
+        "evidence": "C:\\Users\\admin\\Desktop\\certificate-admin-console\\workflow\\tasks\\20261113-103832-835581-t0-one-command-application-bootstrap\\verification\\20261113-110025-679418.md"
+      }
+    },
+    {
+      "at": "2026-11-13T03:01:17+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T03:01:54+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\Desktop\\certificate-admin-console\\workflow\\tasks\\20261113-103832-835581-t0-one-command-application-bootstrap\\verification\\20261113-110154-886513.md"
+      }
+    },
+    {
+      "at": "2026-11-13T03:02:25+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "pass",
+        "finding": null
+      }
+    },
+    {
+      "at": "2026-11-13T03:02:25+00:00",
+      "event": "DELIVERY_RECORDED",
+      "details": {
+        "status": "pending-acceptance"
+      }
+    },
+    {
+      "at": "2026-11-13T03:02:26+00:00",
+      "event": "CLOSED",
+      "details": {
+        "summary": "C:\\Users\\admin\\Desktop\\certificate-admin-console\\workflow\\tasks\\20261113-103832-835581-t0-one-command-application-bootstrap\\summary.md"
+      }
+    }
+  ]
+}

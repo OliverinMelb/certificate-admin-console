@@ -1,0 +1,321 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-103832-180782-certificate-admin-implementation-roa",
+  "title": "Certificate admin implementation roadmap",
+  "tier": "contract",
+  "workflow_class": "app-change",
+  "state": "PLAN",
+  "created_at": "2026-11-13T02:38:32+00:00",
+  "updated_at": "2026-11-13T02:40:49+00:00",
+  "workspace": {
+    "kind": "main-checkout",
+    "branch": "main",
+    "detached": false,
+    "head_sha": "<unborn>",
+    "dirty_fingerprint": "52be710c45a78fa846621bfdabc295418eed0a988795c5e87b1263a0544cad62",
+    "dirty_entries": [
+      {
+        "status": "??",
+        "path": "AGENTS.md",
+        "hash": "aa62d5d72906e6f572254de939e2c150d433ef3daf218df17fdef17ab18c3b12"
+      },
+      {
+        "status": "??",
+        "path": "README.md",
+        "hash": "727c12684cdd88c8bb48ad5e112a5caf67627e53f915c2c572308cfe010c784f"
+      },
+      {
+        "status": "??",
+        "path": "decisions.md",
+        "hash": "5664a05a1943b0e9fe0b55aea277d109606b7e644e53b34d51f89f4d83605e6a"
+      },
+      {
+        "status": "??",
+        "path": "docs/agents/domain.md",
+        "hash": "8fcd1a12ea3b928dbc76ed85cbb03f2058a4d98b0e754f33f17534c24cd8cce6"
+      },
+      {
+        "status": "??",
+        "path": "docs/agents/issue-tracker.md",
+        "hash": "7c79eccc26290e75c734377176a9ee32f90fca950d3cd42ce5dd4714c94aad41"
+      },
+      {
+        "status": "??",
+        "path": "spec.md",
+        "hash": "b2be208a6d6214a3a6ffc58be43efe9b793f777ce30b02b7d58bee43352fc614"
+      },
+      {
+        "status": "??",
+        "path": "tasks.md",
+        "hash": "d786eaac0ba7d9313bd4d3b8dd3d405f910ada87083bb1478eb93aec2a92dfd0"
+      },
+      {
+        "status": "??",
+        "path": "workflow/config.json",
+        "hash": "38995ddca8d2c9963d9193a8ebaa95a5cdf1c755f7119eb457c6d5ddce327a4b"
+      }
+    ],
+    "base_sha": "<unborn>"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch",
+      "decisions.md",
+      "spec.md",
+      "tasks.md",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [
+      "grilling",
+      "tdd"
+    ],
+    "source_refs": [
+      "spec.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": []
+  },
+  "planning": {
+    "status": "discovering",
+    "grilling_status": "pending",
+    "unresolved_decisions": [
+      "Each requirement needs explicit user confirmation before its execution packet can enter EXECUTE."
+    ],
+    "decisions": [],
+    "acceptance_criteria": [],
+    "spec_ref": "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/spec.md",
+    "multi_session": true,
+    "tickets": [
+      {
+        "id": "T0",
+        "title": "One-command bootstrap",
+        "blocked_by": [],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T0.md after per-ticket user confirmation."
+        ]
+      },
+      {
+        "id": "T1",
+        "title": "Tenant-scoped certificate list",
+        "blocked_by": [
+          "T0"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T1.md after per-ticket user confirmation."
+        ]
+      },
+      {
+        "id": "T2",
+        "title": "Bulk issuance outcomes",
+        "blocked_by": [
+          "T1"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T2.md after per-ticket user confirmation."
+        ]
+      },
+      {
+        "id": "T3",
+        "title": "Concurrent idempotent retries",
+        "blocked_by": [
+          "T2"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T3.md after per-ticket user confirmation."
+        ]
+      },
+      {
+        "id": "T4",
+        "title": "Certificate revocation",
+        "blocked_by": [
+          "T3"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T4.md after per-ticket user confirmation."
+        ]
+      },
+      {
+        "id": "T5",
+        "title": "Tenant-local dates",
+        "blocked_by": [
+          "T4"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T5.md after per-ticket user confirmation."
+        ]
+      },
+      {
+        "id": "T6",
+        "title": "Streaming CSV at 100k rows",
+        "blocked_by": [
+          "T5"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T6.md after per-ticket user confirmation."
+        ]
+      },
+      {
+        "id": "T7",
+        "title": "Delivery and evidence",
+        "blocked_by": [
+          "T6"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T7.md after per-ticket user confirmation."
+        ]
+      }
+    ]
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 0,
+    "verification_attempts": 0
+  },
+  "verification": {
+    "latest": null
+  },
+  "acceptance_evidence": {},
+  "delivery": {
+    "status": "development-in-progress"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T02:38:32+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T02:40:45+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T0",
+        "title": "One-command bootstrap",
+        "blocked_by": [],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T0.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:46+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T1",
+        "title": "Tenant-scoped certificate list",
+        "blocked_by": [
+          "T0"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T1.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:46+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T2",
+        "title": "Bulk issuance outcomes",
+        "blocked_by": [
+          "T1"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T2.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:47+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T3",
+        "title": "Concurrent idempotent retries",
+        "blocked_by": [
+          "T2"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T3.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:47+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T4",
+        "title": "Certificate revocation",
+        "blocked_by": [
+          "T3"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T4.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:48+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T5",
+        "title": "Tenant-local dates",
+        "blocked_by": [
+          "T4"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T5.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:48+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T6",
+        "title": "Streaming CSV at 100k rows",
+        "blocked_by": [
+          "T5"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T6.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:49+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T7",
+        "title": "Delivery and evidence",
+        "blocked_by": [
+          "T6"
+        ],
+        "acceptance_criteria": [
+          "Meet the explicit acceptance criteria in .scratch/certificate-admin/issues/T7.md after per-ticket user confirmation."
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T02:40:49+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": null,
+        "opened": [
+          "Each requirement needs explicit user confirmation before its execution packet can enter EXECUTE."
+        ],
+        "resolved": [],
+        "decisions": [],
+        "acceptance": [],
+        "spec_ref": "workflow/tasks/20261113-103832-180782-certificate-admin-implementation-roa/spec.md",
+        "multi_session": true,
+        "grilling_status": "pending"
+      }
+    }
+  ]
+}
