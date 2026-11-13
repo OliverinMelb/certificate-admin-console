@@ -2,7 +2,7 @@
 
 独立的多租户培训证书后台项目。已确定 Vue 3 + FastAPI + SQLite；使用 SDD + TDD 和 codex-workflow，逐项确认技术方案后开发。
 
-当前状态：T2/T5 已集成并保存为本地基线 746edee。T3/T4/T6 已在三个独立worktree开发并集成，接口/启动/浏览器检查及独立代码审查通过，业务验收待用户确认；最终记录以 workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/ 为准。本次授权将通过本地提交与快进合并同步到 Desktop 主目录的 main；提交结果以Git日志为准，未推远端。
+当前状态：T2/T5 已集成并保存为本地基线 746edee。T3/T4/T6 已在三个独立worktree开发并集成，接口/启动/浏览器检查及独立代码审查通过，业务验收待用户确认；最终记录以 workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/ 为准。应用代码已本地提交为7d90f26，并快进合并到 Desktop 主目录的main；验收记录见docs/acceptance.md，未推远端。
 
 - [轻量规格](spec.md)：功能范围、A1～A7、接口草案、影响范围与验证策略。
 - [开发任务](tasks.md)：T0～T7、依赖、确认点和完成条件。
