@@ -1,0 +1,221 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-142850-993265-t7-local-delivery-and-original-evide",
+  "title": "T7 local delivery and original evidence inventory",
+  "tier": "small",
+  "workflow_class": "app-change",
+  "state": "CLOSED",
+  "created_at": "2026-11-13T06:28:51+00:00",
+  "updated_at": "2026-11-13T06:36:33+00:00",
+  "workspace": {
+    "kind": "linked-worktree",
+    "branch": null,
+    "detached": true,
+    "head_sha": "4fdc77a2817c860630cadd15065f6cc7d98bc8c8",
+    "dirty_fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "dirty_entries": [],
+    "base_sha": "4fdc77a2817c860630cadd15065f6cc7d98bc8c8"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch/certificate-admin",
+      "decisions.md",
+      "docs",
+      "README.md",
+      "scripts",
+      "spec.md",
+      "tasks.md",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [],
+    "source_refs": [
+      ".scratch/certificate-admin/issues/T7.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": []
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "User confirmed T7 proposal and validation boundaries; local docs/scripts commits authorized; no remote push. Preserve original records, label missing exports honestly."
+    ],
+    "acceptance_criteria": [
+      "Delivery documentation and A1-A7 evidence index match approved implemented behavior; no API dependency or database changes.",
+      "Local ZIP manifest and SHA256 verified; extracted package starts and serves UI assets and tenant-scoped APIs.",
+      "Original AI evidence inventory identifies available sources and explicitly records completeness and export gaps."
+    ],
+    "spec_ref": null,
+    "multi_session": false,
+    "tickets": []
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 1,
+    "verification_attempts": 2
+  },
+  "verification": {
+    "latest": {
+      "result": "PASS",
+      "verification_id": "20261113-143614-166719",
+      "head_sha": "4fdc77a2817c860630cadd15065f6cc7d98bc8c8",
+      "dirty_fingerprint": "66409d30b095150e7450c6b1792b6fc54dcd007d7d9f1b8c66afbef8f0cadb2b",
+      "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+      "planning_sha256": "044b9ade6840e6aa84eb70ac105a830e42b8e34c5633178982252f23afc3444b",
+      "evidence": "workflow/tasks/20261113-142850-993265-t7-local-delivery-and-original-evide/verification/20261113-143614-166719.md",
+      "acceptance_coverage": {
+        "status": "pending",
+        "errors": [],
+        "pending": [
+          {
+            "id": "AC-3",
+            "reason": "Current original log exists, but complete cross-fork/subagent export and privacy-reviewed deliverable remain unavailable; source inventory is docs/ai-evidence.md."
+          }
+        ]
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "AC-1": {
+      "criterion": "Delivery documentation and A1-A7 evidence index match approved implemented behavior; no API dependency or database changes.",
+      "implementation_refs": [
+        "docs/delivery.md",
+        "docs/acceptance.md"
+      ],
+      "check_refs": [
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-2": {
+      "criterion": "Local ZIP manifest and SHA256 verified; extracted package starts and serves UI assets and tenant-scoped APIs.",
+      "implementation_refs": [
+        "scripts/package_delivery.py",
+        "workflow/tasks/20261113-142850-993265-t7-local-delivery-and-original-evide/evidence.md"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-3": {
+      "criterion": "Original AI evidence inventory identifies available sources and explicitly records completeness and export gaps.",
+      "implementation_refs": [],
+      "check_refs": [],
+      "pending_reason": "Current original log exists, but complete cross-fork/subagent export and privacy-reviewed deliverable remain unavailable; source inventory is docs/ai-evidence.md."
+    }
+  },
+  "delivery": {
+    "status": "pending-acceptance"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T06:28:51+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T06:29:06+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [],
+        "decisions": [
+          "User confirmed T7 proposal and validation boundaries; local docs/scripts commits authorized; no remote push. Preserve original records, label missing exports honestly."
+        ],
+        "acceptance": [
+          "Delivery documentation and A1-A7 evidence index match approved implemented behavior; no API dependency or database changes.",
+          "Local ZIP manifest and SHA256 verified; extracted package starts and serves UI assets and tenant-scoped APIs.",
+          "Original AI evidence inventory identifies available sources and explicitly records completeness and export gaps."
+        ],
+        "spec_ref": null,
+        "multi_session": false,
+        "grilling_status": "confirmed"
+      }
+    },
+    {
+      "at": "2026-11-13T06:29:07+00:00",
+      "event": "TRANSITION",
+      "details": {
+        "to": "EXECUTE",
+        "note": null
+      }
+    },
+    {
+      "at": "2026-11-13T06:33:01+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T06:33:02+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T06:33:02+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-3"
+      }
+    },
+    {
+      "at": "2026-11-13T06:34:08+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-142850-993265-t7-local-delivery-and-original-evide\\verification\\20261113-143408-715882.md"
+      }
+    },
+    {
+      "at": "2026-11-13T06:34:32+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "fix",
+        "finding": "Spec and Standards: stale confirmation wording remains; archive verify must compare sidecar SHA256."
+      }
+    },
+    {
+      "at": "2026-11-13T06:36:14+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-142850-993265-t7-local-delivery-and-original-evide\\verification\\20261113-143614-166719.md"
+      }
+    },
+    {
+      "at": "2026-11-13T06:36:32+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "pass",
+        "finding": null
+      }
+    },
+    {
+      "at": "2026-11-13T06:36:33+00:00",
+      "event": "DELIVERY_RECORDED",
+      "details": {
+        "status": "pending-acceptance"
+      }
+    },
+    {
+      "at": "2026-11-13T06:36:33+00:00",
+      "event": "CLOSED",
+      "details": {
+        "summary": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-142850-993265-t7-local-delivery-and-original-evide\\summary.md"
+      }
+    }
+  ]
+}
