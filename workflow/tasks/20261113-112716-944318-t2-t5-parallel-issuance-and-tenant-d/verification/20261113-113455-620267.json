@@ -1,0 +1,111 @@
+{
+  "schema_version": 2,
+  "engine_version": "1.4.0",
+  "verification_id": "20261113-113455-620267",
+  "task_id": "20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d",
+  "run_at": "2026-11-13T03:34:55+00:00",
+  "result": "PASS",
+  "head_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+  "dirty_fingerprint": "54110a35049d731dc58792ed9c2790f964a80bfa85c33edc3af5b246ea2ffe00",
+  "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+  "planning_sha256": "99a7ba0f2789948a4ae260402b3b0b136ffda27d0eac72ae8819728753e951ab",
+  "changed_files": [
+    ".scratch/certificate-admin/T3-T4-T6-parallel-plan.md",
+    ".scratch/certificate-admin/T3-proposal.md",
+    ".scratch/certificate-admin/T4-proposal.md",
+    ".scratch/certificate-admin/T6-proposal.md",
+    "README.md",
+    "backend/T2-evidence.md",
+    "backend/T5-evidence.md",
+    "backend/app/certificate_query.py",
+    "backend/app/issuance.py",
+    "backend/app/main.py",
+    "backend/app/tenant_time.py",
+    "backend/pyproject.toml",
+    "backend/tests/test_certificates.py",
+    "backend/tests/test_issuance.py",
+    "backend/tests/test_tenant_time.py",
+    "backend/uv.lock",
+    "decisions.md",
+    "frontend/src/api/certificates.ts",
+    "frontend/src/api/issuance.ts",
+    "frontend/src/components/certificates/BulkIssue.vue",
+    "frontend/src/components/certificates/CertificateDetail.vue",
+    "frontend/src/components/certificates/CertificateFilters.vue",
+    "frontend/src/components/certificates/CertificatePage.vue",
+    "frontend/src/components/certificates/CertificateTable.vue",
+    "frontend/src/components/certificates/CertificateTime.vue",
+    "frontend/src/composables/useBulkIssue.ts",
+    "tasks.md"
+  ],
+  "unchanged_preexisting_dirty": [],
+  "scope_violations": [],
+  "checks": [
+    {
+      "name": "frontend-types",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 1.309,
+      "output": ""
+    },
+    {
+      "name": "frontend-build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 0.707,
+      "output": "vite v8.3.8 building client environment for production...\ntransforming...\n✓ 45 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                  0.41 kB │ gzip:  0.30 kB\ndist/assets/index-BjAmAcU3.css   5.17 kB │ gzip:  1.66 kB\ndist/assets/index-DfT3YYX7.js   82.34 kB │ gzip: 31.51 kB\n\n✓ built in 253ms\n"
+    },
+    {
+      "name": "http-contracts",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 2.866,
+      "output": "...........................                                              [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n27 passed, 1 warning in 1.94s\n"
+    },
+    {
+      "name": "startup-smoke",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 36.424,
+      "output": "....                                                                     [100%]\n4 passed in 35.70s\n"
+    }
+  ],
+  "acceptance_coverage": {
+    "status": "pending",
+    "errors": [],
+    "pending": [
+      {
+        "id": "AC-3",
+        "reason": "Browser acceptance of newly integrated issuance and tenant dates is pending; frontend build alone does not establish it."
+      }
+    ]
+  },
+  "verification_errors": []
+}

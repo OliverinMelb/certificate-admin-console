@@ -1,0 +1,322 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-114234-719504-t3-t4-t6-parallel-idempotency-revoca",
+  "title": "T3 T4 T6 parallel idempotency revocation export",
+  "tier": "contract",
+  "workflow_class": "app-change",
+  "state": "PLAN",
+  "created_at": "2026-11-13T03:42:34+00:00",
+  "updated_at": "2026-11-13T03:43:11+00:00",
+  "workspace": {
+    "kind": "linked-worktree",
+    "branch": null,
+    "detached": true,
+    "head_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+    "dirty_fingerprint": "de3ce0c458b983cc4dc39ba1e57c1ace69efa08d2190a99e29752d2947a4ba3e",
+    "dirty_entries": [
+      {
+        "status": "??",
+        "path": ".scratch/certificate-admin/T3-T4-T6-parallel-plan.md",
+        "hash": "dbc019aeb29e2d8e3016718fe1546cd69e0db03c90a340ed809d5d5f3f424b57"
+      },
+      {
+        "status": "??",
+        "path": ".scratch/certificate-admin/T3-proposal.md",
+        "hash": "2d14b442576cd455f15789c5e33b4562719993ebf82db0c2f330f0cffe6ecbfc"
+      },
+      {
+        "status": "??",
+        "path": ".scratch/certificate-admin/T4-proposal.md",
+        "hash": "242176db0c31bc7b635709b653b083d46af0cfad0364f67268198d55c92b0737"
+      },
+      {
+        "status": "??",
+        "path": ".scratch/certificate-admin/T6-proposal.md",
+        "hash": "6202cc6f6a675c2527b2e90523f785731d63cba0eb4d3f98ce4e9ae142f014d0"
+      },
+      {
+        "status": " M",
+        "path": ".scratch/certificate-admin/issues/T2.md",
+        "hash": "ca3724d86b41af602b70a64156c09aadcc110c92f20b9253736e477355b88941"
+      },
+      {
+        "status": " M",
+        "path": ".scratch/certificate-admin/issues/T5.md",
+        "hash": "03c2d6038ef9c776f6df3f2f7cfbf64d1567e0d1496975b8d3cdc5c5c37bfe9c"
+      },
+      {
+        "status": " M",
+        "path": "README.md",
+        "hash": "0c7bb70d2bf5a3903526b4009464b5fc9c9cad518a65120071febac82506ab39"
+      },
+      {
+        "status": "??",
+        "path": "backend/T2-evidence.md",
+        "hash": "fbb4b957c5f5951b993e8278c71b656471987de06917897793792ed96f5af16e"
+      },
+      {
+        "status": "??",
+        "path": "backend/T5-evidence.md",
+        "hash": "af27f95269083eddad2d3bdc0fa07fa2d7261c6c2faf9e8744f1cce2ec390485"
+      },
+      {
+        "status": "??",
+        "path": "backend/app/certificate_query.py",
+        "hash": "931f9f561e384882acc8abbb8d26c1663ea017bbcb3ebc5e594b11cd1fb71d27"
+      },
+      {
+        "status": "??",
+        "path": "backend/app/issuance.py",
+        "hash": "860c60504e95b336d5d8f7ef20f61938072b41e0c869233844181053445dc452"
+      },
+      {
+        "status": " M",
+        "path": "backend/app/main.py",
+        "hash": "affee3a01883ad9274728cf972f5e8d80ae797a7c5e203996cf97745e7822252"
+      },
+      {
+        "status": "??",
+        "path": "backend/app/tenant_time.py",
+        "hash": "8bce9604217f8f80f91987c6548d1675bfadd7f141f5d4d67b49734b63983387"
+      },
+      {
+        "status": " M",
+        "path": "backend/pyproject.toml",
+        "hash": "c10ace1da2e0b987a4ded335bfaeca619a9ab233a11a7d4d5bb7cbf139743fc3"
+      },
+      {
+        "status": " M",
+        "path": "backend/tests/test_certificates.py",
+        "hash": "8c0ddc3b05f64a06237a8ca0288e1ac58ccbde46c6abf45de46997117717cb60"
+      },
+      {
+        "status": "??",
+        "path": "backend/tests/test_issuance.py",
+        "hash": "25a269a253bcc8a6a1498aff8a7707bd15470194fc741be6c8ce13ea6989ae64"
+      },
+      {
+        "status": "??",
+        "path": "backend/tests/test_tenant_time.py",
+        "hash": "b4c2174ebe81e0c5436f71bdecb837400779bcb5037abeab0ffb2a76f47a0c4d"
+      },
+      {
+        "status": " M",
+        "path": "backend/uv.lock",
+        "hash": "d728be6753f5e57cde85e3b0854796410cedfd37ebec3dbbdf5d5d1c690a57e9"
+      },
+      {
+        "status": " M",
+        "path": "decisions.md",
+        "hash": "b2ed4123fcffe5705578be93d84b04bf001c1ac58c7279ca52bb2bb7a9591249"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/api/certificates.ts",
+        "hash": "5d3923fdaddd29a7d3b7407a2ef20e0f65a5bca423a3a2f983531e39caabaf44"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/api/issuance.ts",
+        "hash": "e262071600cc9d5669f11c456aa83d32336d011383e435ff7fac0ad1b01ec7b9"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/components/certificates/BulkIssue.vue",
+        "hash": "8ad4898af58e8bc7d3af714061ef8f37f5702aaf6501df8f9fb3b01915444468"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/components/certificates/CertificateDetail.vue",
+        "hash": "30e13112b234fd0bf02be6f5b9728eeb054c02bfbbe70aa4a1c32a90b6bfaf39"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/components/certificates/CertificateFilters.vue",
+        "hash": "054703a5ad9f14e68fea85b63edff52239c392ef3c3497697e0ba66abac32f06"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/components/certificates/CertificatePage.vue",
+        "hash": "29d869742609ddc0804f1b77dfde80b175c9a62ed39c93a8f89b0062df8b680f"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/components/certificates/CertificateTable.vue",
+        "hash": "41e5ffabf7ca3cfa29886bbb0963b6a9a0a0c90bfc55f478689e26a48947b27b"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/components/certificates/CertificateTime.vue",
+        "hash": "11fdc2bf7a1e78528df5e1a67d1b6bdd203987e730d10118a225eb1bd34db3d1"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/composables/useBulkIssue.ts",
+        "hash": "d504194c697c505f618961e7c51bfbc7547000d3e8a1390394e8bf4829f3a7f7"
+      },
+      {
+        "status": " M",
+        "path": "tasks.md",
+        "hash": "6010f5150c3df92fc94872651b4cf2bcf135143802b5ed7f8fd07319aae17adf"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/brief.md",
+        "hash": "cf889aab8e6b403af20c5e772ec7d0c1cec4b49ebee2eab571030287bb097470"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/browser-error.txt",
+        "hash": "4013208da11462d0dec2220fa87fe20e33a70fdf1c38ee8ea0e2f167316a7c78"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/browser-ready.png",
+        "hash": "0ea4608017dff733706ce4c420409283a74acc0ae9768be6a4e4d70a2c165e12"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/browser-ready.txt",
+        "hash": "8ccb3824427ea2d00fa1d274a05bdf44f50c918a91660b4fa40cc0fca77fb23e"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/evidence.md",
+        "hash": "ddef4e970e1087aaad8c7cb24fd767adb3ff0069bf7243895cb41ed84c4b20e6"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/planning.md",
+        "hash": "fe3f70adaf828cb5d532b9d6e53cf01aab7b7addacbc182d441c548f8bebaac8"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/review.md",
+        "hash": "544d255396185edda23293919fc5e8a09c05bbf4e77e375481911fa40cd9cfdb"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/spec.md",
+        "hash": "a450cd7417253a5e1d44562f9d37e2cee53c798a5278ff48ee0e0a2750eee8ba"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/summary.md",
+        "hash": "c1174bbc652fe6dae8e276abaf52c8d44f7148fc8668d863efb7a554ba2afa01"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/task.json",
+        "hash": "a3cfdb8666d165669a752ccedda9a61af076435b0313f5275c905702de3273f1"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/verification/20261113-113455-620267.json",
+        "hash": "12e91026d469aaef04ebc2af3c4cbb773e25a3027c785fed546283fe8db548dd"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/verification/20261113-113455-620267.md",
+        "hash": "efa1ef7833876505aa29041a787aeca97ca9fcab746b66cf503bb4b88f3e613c"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/verification/20261113-113908-227691.json",
+        "hash": "fb168a6c5b636a5217b6aca1554c55c966cf07cb535cfc6d23afad0ea88da4fe"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/verification/20261113-113908-227691.md",
+        "hash": "5d4fc578c286c6d38aba3348d960ea109e4e8c672171bae6c4056169c7692559"
+      }
+    ],
+    "base_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch",
+      "backend",
+      "decisions.md",
+      "frontend",
+      "README.md",
+      "scripts",
+      "spec.md",
+      "tasks.md",
+      "tests",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [
+      "tdd",
+      "vue-best-practices"
+    ],
+    "source_refs": [
+      ".scratch/certificate-admin/T3-T4-T6-parallel-plan.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": []
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "User confirmed original T3/T4/T6 proposals and explicitly declined further grilling; T2/T5 integrated PASS. Confirmation is not a claim of a question-by-question interview."
+    ],
+    "acceptance_criteria": [
+      "T1 T2 T5 contracts remain green and cross-ticket interactions pass",
+      "T3 persistent atomic idempotency, conflict and true concurrency through HTTP plus browser retry",
+      "T4 tenant-scoped repeated and concurrent revocation with exactly one audit and browser confirmation",
+      "T6 CSV correctness, cancellation and repeated 100000-row export under 60 seconds with concurrent list success"
+    ],
+    "spec_ref": "workflow/tasks/20261113-114234-719504-t3-t4-t6-parallel-idempotency-revoca/spec.md",
+    "multi_session": false,
+    "tickets": []
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 0,
+    "verification_attempts": 0
+  },
+  "verification": {
+    "latest": null
+  },
+  "acceptance_evidence": {},
+  "delivery": {
+    "status": "development-in-progress"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T03:42:34+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T03:43:11+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [],
+        "decisions": [
+          "User confirmed original T3/T4/T6 proposals and explicitly declined further grilling; T2/T5 integrated PASS. Confirmation is not a claim of a question-by-question interview."
+        ],
+        "acceptance": [
+          "T1 T2 T5 contracts remain green and cross-ticket interactions pass",
+          "T3 persistent atomic idempotency, conflict and true concurrency through HTTP plus browser retry",
+          "T4 tenant-scoped repeated and concurrent revocation with exactly one audit and browser confirmation",
+          "T6 CSV correctness, cancellation and repeated 100000-row export under 60 seconds with concurrent list success"
+        ],
+        "spec_ref": "workflow/tasks/20261113-114234-719504-t3-t4-t6-parallel-idempotency-revoca/spec.md",
+        "multi_session": false,
+        "grilling_status": "confirmed"
+      }
+    }
+  ]
+}

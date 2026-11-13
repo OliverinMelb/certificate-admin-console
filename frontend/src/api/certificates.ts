@@ -15,6 +15,9 @@ export interface Certificate {
   course_id: string
   course_title: string
   issued_at: string
+  issued_local_date: string
+  issued_local_datetime: string
+  timezone: string
   status: 'ACTIVE' | 'REVOKED'
 }
 export interface Items<T> { items: T[] }
@@ -23,7 +26,7 @@ export interface CertificateList extends Items<Certificate> {
   page: number
   page_size: number
 }
-export type CertificateSort = 'serial_number' | 'learner_name'
+export type CertificateSort = 'serial_number' | 'learner_name' | 'issue_date'
 export type SortOrder = 'asc' | 'desc'
 
 export async function get<T>(path: string, signal: AbortSignal, actorId?: string): Promise<T> {

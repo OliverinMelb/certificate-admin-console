@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, useTemplateRef } from 'vue'
-import { formatUtc, type Certificate } from '../../api/certificates'
+import type { Certificate } from '../../api/certificates'
+import CertificateTime from './CertificateTime.vue'
 defineProps<{ item: Certificate | null; loading: boolean; error: string }>()
 const emit = defineEmits<{ close: []; retry: [] }>()
 const dialog = useTemplateRef<HTMLDialogElement>('dialog')
@@ -18,7 +19,7 @@ onMounted(() => dialog.value?.showModal())
       <dt>学员 ID</dt><dd>{{ item.learner_id }}</dd>
       <dt>课程</dt><dd>{{ item.course_title }}</dd>
       <dt>课程 ID</dt><dd>{{ item.course_id }}</dd>
-      <dt>颁发时间（UTC）</dt><dd>{{ formatUtc(item.issued_at) }}</dd>
+      <dt>颁发时间（租户当地）</dt><dd><CertificateTime :local-date="item.issued_local_date" :local-datetime="item.issued_local_datetime" :timezone="item.timezone" /></dd>
       <dt>状态</dt><dd>{{ item.status === 'ACTIVE' ? '有效' : '已撤销' }}</dd>
       <dt>证书 ID</dt><dd>{{ item.id }}</dd>
     </dl>

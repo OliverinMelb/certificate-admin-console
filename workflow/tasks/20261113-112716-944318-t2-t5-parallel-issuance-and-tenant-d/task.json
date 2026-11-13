@@ -1,0 +1,388 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d",
+  "title": "T2 T5 parallel issuance and tenant dates",
+  "tier": "contract",
+  "workflow_class": "app-change",
+  "state": "CLOSED",
+  "created_at": "2026-11-13T03:27:17+00:00",
+  "updated_at": "2026-11-13T03:39:58+00:00",
+  "workspace": {
+    "kind": "linked-worktree",
+    "branch": null,
+    "detached": true,
+    "head_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+    "dirty_fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "dirty_entries": [],
+    "base_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch",
+      "backend",
+      "decisions.md",
+      "frontend",
+      "README.md",
+      "spec.md",
+      "tasks.md",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [
+      "tdd",
+      "vue-best-practices"
+    ],
+    "source_refs": [
+      ".scratch/certificate-admin/T2-T5-execution.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": [
+      {
+        "writer_id": "t2",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t2\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+        "owned_paths": [
+          "backend/app/issuance.py",
+          "backend/T2-evidence.md",
+          "backend/tests/test_issuance.py",
+          "frontend/src/api/issuance.ts",
+          "frontend/src/components/certificates/BulkIssue.vue",
+          "frontend/src/composables/useBulkIssue.ts"
+        ],
+        "integration_order": 1
+      },
+      {
+        "writer_id": "t5",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t5\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+        "owned_paths": [
+          "backend/app/certificate_query.py",
+          "backend/app/tenant_time.py",
+          "backend/pyproject.toml",
+          "backend/T5-evidence.md",
+          "backend/tests/test_tenant_time.py",
+          "backend/uv.lock",
+          "frontend/src/components/certificates/CertificateTime.vue"
+        ],
+        "integration_order": 2
+      }
+    ]
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "User approved both parallel proposals including no reissue after revocation; user confirmed T1 browser acceptance and authorized local T1 baseline commit. See decisions D006 D007 and approved proposals."
+    ],
+    "acceptance_criteria": [
+      "T1 HTTP and startup contracts remain green",
+      "T2 public HTTP eligibility, no reissue, atomic audit, repeated and cross-tenant writes",
+      "T5 public HTTP literal timezone samples, DST, errors and stable local-day pagination",
+      "UI bulk issuance outcomes, identity isolation and server-derived local dates"
+    ],
+    "spec_ref": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/spec.md",
+    "multi_session": true,
+    "tickets": [
+      {
+        "id": "T2",
+        "title": "Bulk issuance and audit",
+        "blocked_by": [],
+        "acceptance_criteria": [
+          "Approved T2 proposal: eligibility, uniqueness, atomic audit, tenant isolation and UI outcomes"
+        ]
+      },
+      {
+        "id": "T5",
+        "title": "Tenant dates and stable sorting",
+        "blocked_by": [],
+        "acceptance_criteria": [
+          "Approved T5 proposal: UTC preservation, zoneinfo, DST and date pagination"
+        ]
+      }
+    ]
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 0,
+    "verification_attempts": 2
+  },
+  "verification": {
+    "latest": {
+      "result": "PASS",
+      "verification_id": "20261113-113908-227691",
+      "head_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+      "dirty_fingerprint": "110f76063774e2b405d440a1430dbe0aa291586de5e6d7d7952b1e3e24b69b39",
+      "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+      "planning_sha256": "79c3d4940275c9f419afd935d288393ad91c8ccdb3e66d5dd8219c96ac32ac81",
+      "evidence": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/verification/20261113-113908-227691.md",
+      "acceptance_coverage": {
+        "status": "covered",
+        "errors": [],
+        "pending": []
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "AC-1": {
+      "criterion": "T1 HTTP and startup contracts remain green",
+      "implementation_refs": [
+        "backend/app/main.py",
+        "backend/tests/test_certificates.py"
+      ],
+      "check_refs": [
+        "http-contracts",
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-2": {
+      "criterion": "T2 public HTTP eligibility, no reissue, atomic audit, repeated and cross-tenant writes",
+      "implementation_refs": [
+        "backend/app/issuance.py",
+        "backend/tests/test_issuance.py"
+      ],
+      "check_refs": [
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-3": {
+      "criterion": "T5 public HTTP literal timezone samples, DST, errors and stable local-day pagination",
+      "implementation_refs": [
+        "backend/app/certificate_query.py",
+        "backend/tests/test_tenant_time.py"
+      ],
+      "check_refs": [
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-4": {
+      "criterion": "UI bulk issuance outcomes, identity isolation and server-derived local dates",
+      "implementation_refs": [
+        "frontend/src/components/certificates/BulkIssue.vue",
+        "frontend/src/components/certificates/CertificateTime.vue",
+        "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/evidence.md",
+        "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/browser-ready.png"
+      ],
+      "check_refs": [
+        "frontend-types",
+        "frontend-build"
+      ],
+      "pending_reason": null
+    }
+  },
+  "delivery": {
+    "status": "pending-acceptance"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T03:27:17+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T03:27:33+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T2",
+        "title": "Bulk issuance and audit",
+        "blocked_by": [],
+        "acceptance_criteria": [
+          "Approved T2 proposal: eligibility, uniqueness, atomic audit, tenant isolation and UI outcomes"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T03:27:34+00:00",
+      "event": "TICKET_UPSERTED",
+      "details": {
+        "id": "T5",
+        "title": "Tenant dates and stable sorting",
+        "blocked_by": [],
+        "acceptance_criteria": [
+          "Approved T5 proposal: UTC preservation, zoneinfo, DST and date pagination"
+        ]
+      }
+    },
+    {
+      "at": "2026-11-13T03:27:34+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [],
+        "decisions": [
+          "User approved both parallel proposals including no reissue after revocation; user confirmed T1 browser acceptance and authorized local T1 baseline commit. See decisions D006 D007 and approved proposals."
+        ],
+        "acceptance": [
+          "T1 HTTP and startup contracts remain green",
+          "T2 public HTTP eligibility, no reissue, atomic audit, repeated and cross-tenant writes",
+          "T5 public HTTP literal timezone samples, DST, errors and stable local-day pagination",
+          "UI bulk issuance outcomes, identity isolation and server-derived local dates"
+        ],
+        "spec_ref": "workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/spec.md",
+        "multi_session": true,
+        "grilling_status": "confirmed"
+      }
+    },
+    {
+      "at": "2026-11-13T03:27:35+00:00",
+      "event": "WRITER_ASSIGNED",
+      "details": {
+        "writer_id": "t2",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t2\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+        "owned_paths": [
+          "backend/app/issuance.py",
+          "backend/T2-evidence.md",
+          "backend/tests/test_issuance.py",
+          "frontend/src/api/issuance.ts",
+          "frontend/src/components/certificates/BulkIssue.vue",
+          "frontend/src/composables/useBulkIssue.ts"
+        ],
+        "integration_order": 1
+      }
+    },
+    {
+      "at": "2026-11-13T03:27:48+00:00",
+      "event": "WRITER_ASSIGNED",
+      "details": {
+        "writer_id": "t5",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t5\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "1b30bbe13fde37334738a22b5a3395d53b8fdee5",
+        "owned_paths": [
+          "backend/app/certificate_query.py",
+          "backend/app/tenant_time.py",
+          "backend/pyproject.toml",
+          "backend/T5-evidence.md",
+          "backend/tests/test_tenant_time.py",
+          "backend/uv.lock",
+          "frontend/src/components/certificates/CertificateTime.vue"
+        ],
+        "integration_order": 2
+      }
+    },
+    {
+      "at": "2026-11-13T03:27:49+00:00",
+      "event": "TRANSITION",
+      "details": {
+        "to": "EXECUTE",
+        "note": null
+      }
+    },
+    {
+      "at": "2026-11-13T03:34:09+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T03:34:10+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T03:34:10+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-3"
+      }
+    },
+    {
+      "at": "2026-11-13T03:34:13+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-4"
+      }
+    },
+    {
+      "at": "2026-11-13T03:34:55+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d\\verification\\20261113-113455-620267.md"
+      }
+    },
+    {
+      "at": "2026-11-13T03:38:26+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T03:38:27+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T03:38:27+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-3"
+      }
+    },
+    {
+      "at": "2026-11-13T03:38:28+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-4"
+      }
+    },
+    {
+      "at": "2026-11-13T03:39:08+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d\\verification\\20261113-113908-227691.md"
+      }
+    },
+    {
+      "at": "2026-11-13T03:39:57+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "pass",
+        "finding": null
+      }
+    },
+    {
+      "at": "2026-11-13T03:39:57+00:00",
+      "event": "DELIVERY_RECORDED",
+      "details": {
+        "status": "pending-acceptance"
+      }
+    },
+    {
+      "at": "2026-11-13T03:39:58+00:00",
+      "event": "CLOSED",
+      "details": {
+        "summary": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d\\summary.md"
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 
 独立的多租户培训证书后台项目。已确定 Vue 3 + FastAPI + SQLite；使用 SDD + TDD 和 codex-workflow，逐项确认技术方案后开发。
 
-当前状态：T0 与 T1 已实现，T1 在 certificate-verification worktree 集成。具体检查、审查与验收状态见 workflow/tasks/20261113-110650-151404-t1-tenant-isolated-certificate-brows/。Desktop 主目录仍为已提交的 T0 基线；T1 尚未提交。T2 及之后的需求尚未实现。
+当前状态：T1 已通过用户浏览器验收并保存为本地基线 1b30bbe。T2、T5 在独立 worktree 并行开发并由 certificate-verification 集成；执行证据见 workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/。Desktop 主目录仍为 T0；未推远端。
 
 - [轻量规格](spec.md)：功能范围、A1～A7、接口草案、影响范围与验证策略。
 - [开发任务](tasks.md)：T0～T7、依赖、确认点和完成条件。
@@ -35,11 +35,11 @@ T1 使用演示身份头 `X-Actor-Id: alice` 或 `X-Actor-Id: bob`。这是题�
 - East：alice@east.test，Australia/Sydney；默认12张证书。
 - West：bob@west.test，Australia/Perth；默认4张证书。
 - 两边都有 Safety 101 和 Alex Lee，以及完成未获证、未完成和已获证报名。
-- 当前时间展示明确标记 UTC；租户当地日期与夏令时在 T5 实现。
+- T5 在列表/详情展示服务端生成的租户当地日期与时间，带 IANA 时区及 UTC 偏移；原始 issued_at 保留 UTC。
 
 读取端点：/api/actors、/api/courses、/api/certificates、/api/certificates/{id}。除演示身份入口外均需要身份头。缺失/未知身份401；跨租户详情与不存在详情均404。
 
-列表参数 q 支持姓名/编号字面包含搜索，% 和 _ 按字面字符处理；sort 为 learner_name/serial_number，order 为 asc/desc，默认按编号升序；page 默认1，page_size 默认50且最大100。未知排序、非法页码/页大小422；页码超出数据范围时返回空items和真实total。
+列表参数 q 支持姓名/编号字面包含搜索，% 和 _ 按字面字符处理；sort 为 learner_name/serial_number/issue_date，order 为 asc/desc，默认按编号升序；page 默认1，page_size 默认50且最大100。未知排序、非法页码/页大小422；页码超出数据范围时返回空items和真实total。
 
 Windows 可使用 curl.exe 验证读取隔离（先启动应用）：
 
@@ -48,7 +48,7 @@ curl.exe -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/certificates?q=Alex"
 curl.exe -H "X-Actor-Id: bob" "http://127.0.0.1:8000/api/certificates/east-cert-001"
 ```
 
-第二个请求应返回404；同一ID由Alice访问应成功。伪造tenant_id查询参数不能扩大所属租户范围。此复现仅覆盖A1读取部分，发证/导出部分尚未实现。
+第二个请求应返回404；同一ID由Alice访问应成功。伪造tenant_id查询参数不能扩大所属租户范围。此复现覆盖 A1 读取部分。发证越租户行为另见下文，导出仍待 T6。
 
 ## 验证
 
@@ -64,4 +64,20 @@ GET /api/health 返回 `{"status":"ok"}`，只表示进程健康。未知 /api �
 
 ## 待交付
 
-剩余A1发证/导出场景、A2～A7、完整业务复现、大数据生成、完整AI原始活动证据及索引。任务内执行摘要不能替代原始会话导出。原题书面题由候选人独立完成，不生成答案或完成声明。
+剩余 A1 导出场景、A2/A3 幂等、A5 CSV 部分、A6 性能、A7 撤销、完整业务复现、大数据生成、完整AI原始活动证据及索引。任务内执行摘要不能替代原始会话导出。原题书面题由候选人独立完成，不生成答案或完成声明。
+
+## T2 / T5 新增行为
+
+选择管理员和课程后，点击批量发证；仅完成课程且从未获证的学员可获证。已有证书（包括已撤销）和未完成学员跳过。结果逐人列出状态及原因，成功后刷新证书列表；身份切换清空旧操作结果。
+
+```text
+curl.exe -X POST -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/courses/east-safety/issue"
+curl.exe -X POST -H "X-Actor-Id: bob" "http://127.0.0.1:8000/api/courses/east-safety/issue"
+curl.exe -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/certificates?sort=issue_date&order=asc"
+```
+
+默认 East 第一次发证 1 人成功，其余跳过；重复提交不会新增证书。Bob 请求 East 课程返回 404。发证结果中的 certificate_id 可用于 GET /api/certificates/{id}/audit，真实发证对应一条 ISSUED 记录。演示种子证书未伪造历史审计。
+
+UTC 2026-01-10T13:30:00Z 在 Sydney 显示 2026-01-11 00:30（+11:00），在 Perth 显示 2026-01-10 21:30（+08:00）。日期排序按当地日历日，同日按唯一 ID 升序；日期计算发生在数据库分页前。
+
+数据库唯一约束不等于幂等结果重放。T3 前，重复提交可能返回 skipped；网络中断后应先核对列表，不承诺返回第一次操作的原始结果。T5 计算日期排序尚未进行十万行性能验证，CSV 仍待 T6。已有重复证书的旧库会在新增唯一索引时明确失败，不自动清理数据。

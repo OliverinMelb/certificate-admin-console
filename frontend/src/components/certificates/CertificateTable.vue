@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { formatUtc, type Certificate } from '../../api/certificates'
+import type { Certificate } from '../../api/certificates'
+import CertificateTime from './CertificateTime.vue'
 defineProps<{ items: readonly Certificate[]; loading: boolean; error: string; hasActor: boolean }>()
 const emit = defineEmits<{ detail: [id: string]; retry: [] }>()
 </script>
@@ -12,10 +13,10 @@ const emit = defineEmits<{ detail: [id: string]; retry: [] }>()
     <p v-else-if="!items.length" class="state muted" role="status">暂无匹配的证书，请尝试其他姓名或编号。</p>
     <div v-else class="table-scroll" tabindex="0" role="region" aria-label="证书列表，可横向滚动">
       <table class="table">
-        <thead><tr><th scope="col">证书编号</th><th scope="col">学员</th><th scope="col">课程</th><th scope="col">颁发时间（UTC）</th><th scope="col">状态</th><th scope="col">详情</th></tr></thead>
+        <thead><tr><th scope="col">证书编号</th><th scope="col">学员</th><th scope="col">课程</th><th scope="col">颁发时间（租户当地）</th><th scope="col">状态</th><th scope="col">详情</th></tr></thead>
         <tbody><tr v-for="item in items" :key="item.id">
           <td class="serial">{{ item.serial_number }}</td><td>{{ item.learner_name }}</td><td>{{ item.course_title }}</td>
-          <td class="timestamp">{{ formatUtc(item.issued_at) }}</td>
+          <td class="timestamp"><CertificateTime :local-date="item.issued_local_date" :local-datetime="item.issued_local_datetime" :timezone="item.timezone" /></td>
           <td><span class="badge" :class="{ revoked: item.status === 'REVOKED' }">{{ item.status === 'ACTIVE' ? '有效' : '已撤销' }}</span></td>
           <td><button type="button" class="detail-button" :aria-label="`查看证书 ${item.serial_number} 的详情`" @click="emit('detail', item.id)">查看详情</button></td>
         </tr></tbody>

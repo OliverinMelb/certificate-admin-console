@@ -1,0 +1,87 @@
+- main:
+  - paragraph: CERTIFICATE ADMIN CONSOLE
+  - heading "证书管理后台" [level=1]
+  - paragraph: 管理培训证书，让每一次学习成果都有据可查。
+  - region "工作空间":
+    - heading "工作空间" [level=2]
+    - paragraph: 演示身份 · 仅查看所属租户的数据
+    - text: 演示管理员
+    - combobox "演示管理员":
+      - option "alice@east.test · East" [selected]
+      - option "bob@west.test · West"
+    - heading "当前租户课程" [level=3]
+    - list:
+      - listitem: Safety 101
+  - region "批量发证":
+    - heading "批量发证" [level=2]
+    - paragraph: 为完成课程且从未获证的学员发证；已有证书（含已撤销）会跳过。
+    - text: 发证课程
+    - combobox "发证课程":
+      - option "Safety 101" [selected]
+    - button "批量发证"
+  - region "已颁发证书":
+    - heading "已颁发证书" [level=2]
+    - generic: East
+    - paragraph: 浏览学员证书与颁发记录。颁发日期和时间按当前租户时区显示。
+    - text: 搜索证书
+    - searchbox "搜索证书" [active]: Alex
+    - text: 排序字段
+    - combobox "排序字段":
+      - option "证书编号"
+      - option "学员姓名"
+      - option "颁发日期（租户当地）" [selected]
+    - text: 排序方向
+    - combobox "排序方向":
+      - option "升序" [selected]
+      - option "降序"
+    - region "证书列表，可横向滚动":
+      - table:
+        - rowgroup:
+          - row "证书编号 学员 课程 颁发时间（租户当地） 状态 详情":
+            - columnheader "证书编号"
+            - columnheader "学员"
+            - columnheader "课程"
+            - columnheader "颁发时间（租户当地）"
+            - columnheader "状态"
+            - columnheader "详情"
+        - rowgroup:
+          - row "EAST-001 Alex Lee Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-001 的详情":
+            - cell "EAST-001"
+            - cell "Alex Lee"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-001 的详情":
+              - button "查看证书 EAST-001 的详情": 查看详情
+          - row "EAST-002 Alex Lee Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-002 的详情":
+            - cell "EAST-002"
+            - cell "Alex Lee"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-002 的详情":
+              - button "查看证书 EAST-002 的详情": 查看详情
+    - navigation "证书分页":
+      - text: 每页
+      - combobox "每页证书数":
+        - option "5"
+        - option "10"
+        - option "50" [selected]
+        - option "100"
+      - text: 条
+      - status: 共 2 条 · 第 1 / 1 页
+      - button "上一页" [disabled]
+      - button "下一页" [disabled]
+  - region "服务连接":
+    - heading "服务连接" [level=2]
+    - status:
+      - generic: 服务已连接
+    - button "重新检查"

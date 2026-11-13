@@ -11,7 +11,7 @@ const emit = defineEmits<{ search: [value: string]; sort: [value: CertificateSor
     </label>
     <label class="field">排序字段
       <select :value="sort" :disabled="disabled" @change="emit('sort', ($event.target as HTMLSelectElement).value as CertificateSort)">
-        <option value="serial_number">证书编号</option><option value="learner_name">学员姓名</option>
+        <option value="serial_number">证书编号</option><option value="learner_name">学员姓名</option><option value="issue_date">颁发日期（租户当地）</option>
       </select>
     </label>
     <label class="field">排序方向

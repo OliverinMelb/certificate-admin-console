@@ -47,6 +47,9 @@ def test_certificate_lists_are_tenant_scoped_with_fixed_samples(client):
             "learner_id": f"{tenant}-learner-001", "learner_name": "Alex Lee",
             "course_id": f"{tenant}-safety", "course_title": "Safety 101",
             "issued_at": "2026-01-10T13:30:00Z", "status": "ACTIVE",
+            "issued_local_date": "2026-01-11" if tenant == "east" else "2026-01-10",
+            "issued_local_datetime": "2026-01-11T00:30:00+11:00" if tenant == "east" else "2026-01-10T21:30:00+08:00",
+            "timezone": "Australia/Sydney" if tenant == "east" else "Australia/Perth",
         }
 
 

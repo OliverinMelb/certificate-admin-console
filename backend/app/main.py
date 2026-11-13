@@ -7,15 +7,6 @@ from fastapi.staticfiles import StaticFiles
 from app.database import connect, initialize
 
 
-CERTIFICATE_SELECT = """
-    SELECT c.id, c.serial_number, c.learner_id, l.name AS learner_name,
-           c.course_id, co.title AS course_title, c.issued_at, c.status
-    FROM certificate c
-    JOIN learner l ON l.tenant_id = c.tenant_id AND l.id = c.learner_id
-    JOIN course co ON co.tenant_id = c.tenant_id AND co.id = c.course_id
-"""
-
-
 def create_app(database_path: str | Path | None = None) -> FastAPI:
     database = Path(database_path) if database_path is not None else (
         Path(__file__).resolve().parents[2] / "data" / "certificates.sqlite3"
@@ -24,6 +15,10 @@ def create_app(database_path: str | Path | None = None) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         initialize(database)
+        from app.issuance import initialize_issuance
+        with connect(database) as db, db:
+            db.execute("BEGIN")
+            initialize_issuance(db)
         yield
 
     app = FastAPI(title="Certificate Admin Console", lifespan=lifespan)
@@ -45,38 +40,34 @@ def create_app(database_path: str | Path | None = None) -> FastAPI:
     @app.get("/api/certificates")
     def certificates(q: str = "", page: int = Query(default=1, ge=1),
                      page_size: int = Query(default=50, ge=1, le=100),
-                     sort: Literal["learner_name", "serial_number"] = "serial_number",
+                     sort: Literal["learner_name", "serial_number", "issue_date"] = "serial_number",
                      order: Literal["asc", "desc"] = "asc",
                      x_actor_id: str | None = Header(default=None)):
+        from app.certificate_query import list_certificates
         with connect(database) as db:
             tenant = tenant_for(db, x_actor_id)
-            escaped = q.strip().replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
-            pattern = f"%{escaped}%"
-            where = """ WHERE c.tenant_id = ?
-                AND (l.name LIKE ? ESCAPE '\\' OR c.serial_number LIKE ? ESCAPE '\\')"""
-            parameters = (tenant, pattern, pattern)
-            column = "l.name" if sort == "learner_name" else "c.serial_number"
-            direction = "DESC" if order == "desc" else "ASC"
-            total = db.execute("SELECT COUNT(*) FROM (" + CERTIFICATE_SELECT + where + ")",
-                               parameters).fetchone()[0]
-            offset = (page - 1) * page_size
-            if offset >= total:
-                return {"items": [], "total": total, "page": page, "page_size": page_size}
-            items = [dict(row) for row in db.execute(
-                CERTIFICATE_SELECT + where + f" ORDER BY {column} {direction}, c.id ASC LIMIT ? OFFSET ?",
-                (*parameters, page_size, offset)
-            )]
-            return {"items": items, "total": total, "page": page, "page_size": page_size}
+            return list_certificates(db, tenant, q, page, page_size, sort, order)
 
     @app.get("/api/certificates/{certificate_id}")
     def certificate_detail(certificate_id: str, x_actor_id: str | None = Header(default=None)):
+        from app.certificate_query import get_certificate
         with connect(database) as db:
             tenant = tenant_for(db, x_actor_id)
-            row = db.execute(CERTIFICATE_SELECT + " WHERE c.tenant_id = ? AND c.id = ?",
-                             (tenant, certificate_id)).fetchone()
-            if row is None:
-                raise HTTPException(status_code=404, detail="Not Found")
-            return dict(row)
+            return get_certificate(db, tenant, certificate_id)
+
+    @app.post("/api/courses/{course_id}/issue")
+    def issue(course_id: str, x_actor_id: str | None = Header(default=None)):
+        from app.issuance import issue_course
+        with connect(database) as db:
+            tenant = tenant_for(db, x_actor_id)
+            return issue_course(db, tenant, x_actor_id, course_id)
+
+    @app.get("/api/certificates/{certificate_id}/audit")
+    def audit(certificate_id: str, x_actor_id: str | None = Header(default=None)):
+        from app.issuance import certificate_audit
+        with connect(database) as db:
+            tenant = tenant_for(db, x_actor_id)
+            return certificate_audit(db, tenant, certificate_id)
 
     @app.get("/api/actors")
     def actors():
