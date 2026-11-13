@@ -1,0 +1,366 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-114507-789367-t3-t4-t6-implementation-on-integrate",
+  "title": "T3 T4 T6 implementation on integrated baseline",
+  "tier": "contract",
+  "workflow_class": "app-change",
+  "state": "CLOSED",
+  "created_at": "2026-11-13T03:45:07+00:00",
+  "updated_at": "2026-11-13T04:03:02+00:00",
+  "workspace": {
+    "kind": "linked-worktree",
+    "branch": null,
+    "detached": true,
+    "head_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+    "dirty_fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "dirty_entries": [],
+    "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch",
+      "backend",
+      "decisions.md",
+      "frontend",
+      "README.md",
+      "scripts",
+      "spec.md",
+      "tasks.md",
+      "tests",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [
+      "tdd",
+      "vue-best-practices"
+    ],
+    "source_refs": [
+      ".scratch/certificate-admin/T3-T4-T6-parallel-plan.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": [
+      {
+        "writer_id": "t3",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t3\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+        "owned_paths": [
+          "backend/app/idempotency.py",
+          "backend/app/issuance.py",
+          "backend/T3-evidence.md",
+          "backend/tests/test_idempotency.py",
+          "backend/tests/test_issuance.py",
+          "frontend/src/api/issuance.ts",
+          "frontend/src/components/certificates/BulkIssue.vue",
+          "frontend/src/composables/useBulkIssue.ts"
+        ],
+        "integration_order": 1
+      },
+      {
+        "writer_id": "t4",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t4\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+        "owned_paths": [
+          "backend/app/revocation.py",
+          "backend/T4-evidence.md",
+          "backend/tests/test_revocation.py",
+          "frontend/src/api/revocation.ts",
+          "frontend/src/components/certificates/RevokeCertificate.vue"
+        ],
+        "integration_order": 2
+      },
+      {
+        "writer_id": "t6",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t6\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+        "owned_paths": [
+          "backend/app/certificate_query.py",
+          "backend/app/csv_export.py",
+          "backend/T6-evidence.md",
+          "backend/tests/test_csv_export.py",
+          "frontend/src/api/export.ts",
+          "frontend/src/components/certificates/ExportCertificates.vue",
+          "scripts/benchmark_export.py",
+          "scripts/generate_export_fixture.py",
+          "tests/test_export_stream.py"
+        ],
+        "integration_order": 3
+      }
+    ]
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "Original proposals approved; user declined further grilling and authorized baseline commit plus parallel implementation. No question-by-question interview claimed."
+    ],
+    "acceptance_criteria": [
+      "Existing T1 T2 T5 and cross-ticket behavior remain valid",
+      "T3 atomic persistent idempotency conflict concurrency restart and browser retry",
+      "T4 tenant isolated repeated concurrent revocation atomic audit and confirmation UI",
+      "T6 CSV ordering tenant dates streaming cancel 100000 rows under 60 seconds and concurrent list"
+    ],
+    "spec_ref": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/spec.md",
+    "multi_session": false,
+    "tickets": []
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 0,
+    "verification_attempts": 2
+  },
+  "verification": {
+    "latest": {
+      "result": "PASS",
+      "verification_id": "20261113-120248-896975",
+      "head_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+      "dirty_fingerprint": "f6b841d9d244fab1fda32611c264d291494d8d9a0ecd8ab3fc86739a998f189f",
+      "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+      "planning_sha256": "5f3a31bbc4eed1df2f07a84e47462a8a01614f76e4336a445d2877aad40ed446",
+      "evidence": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/verification/20261113-120248-896975.md",
+      "acceptance_coverage": {
+        "status": "covered",
+        "errors": [],
+        "pending": []
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "AC-1": {
+      "criterion": "Existing T1 T2 T5 and cross-ticket behavior remain valid",
+      "implementation_refs": [
+        "backend/tests/test_workflow_integration.py"
+      ],
+      "check_refs": [
+        "http-contracts",
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-2": {
+      "criterion": "T3 atomic persistent idempotency conflict concurrency restart and browser retry",
+      "implementation_refs": [
+        "backend/app/idempotency.py",
+        "frontend/src/composables/useBulkIssue.ts"
+      ],
+      "check_refs": [
+        "http-contracts",
+        "frontend-types",
+        "frontend-build"
+      ],
+      "pending_reason": null
+    },
+    "AC-3": {
+      "criterion": "T4 tenant isolated repeated concurrent revocation atomic audit and confirmation UI",
+      "implementation_refs": [
+        "backend/app/revocation.py",
+        "frontend/src/components/certificates/CertificateDetail.vue"
+      ],
+      "check_refs": [
+        "http-contracts",
+        "frontend-types"
+      ],
+      "pending_reason": null
+    },
+    "AC-4": {
+      "criterion": "T6 CSV ordering tenant dates streaming cancel 100000 rows under 60 seconds and concurrent list",
+      "implementation_refs": [
+        "backend/app/csv_export.py",
+        "scripts/benchmark_export.py"
+      ],
+      "check_refs": [
+        "http-contracts",
+        "startup-smoke",
+        "frontend-types"
+      ],
+      "pending_reason": null
+    }
+  },
+  "delivery": {
+    "status": "pending-acceptance"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T03:45:07+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T03:45:33+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [],
+        "decisions": [
+          "Original proposals approved; user declined further grilling and authorized baseline commit plus parallel implementation. No question-by-question interview claimed."
+        ],
+        "acceptance": [
+          "Existing T1 T2 T5 and cross-ticket behavior remain valid",
+          "T3 atomic persistent idempotency conflict concurrency restart and browser retry",
+          "T4 tenant isolated repeated concurrent revocation atomic audit and confirmation UI",
+          "T6 CSV ordering tenant dates streaming cancel 100000 rows under 60 seconds and concurrent list"
+        ],
+        "spec_ref": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/spec.md",
+        "multi_session": false,
+        "grilling_status": "confirmed"
+      }
+    },
+    {
+      "at": "2026-11-13T03:45:34+00:00",
+      "event": "WRITER_ASSIGNED",
+      "details": {
+        "writer_id": "t3",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t3\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+        "owned_paths": [
+          "backend/app/idempotency.py",
+          "backend/app/issuance.py",
+          "backend/T3-evidence.md",
+          "backend/tests/test_idempotency.py",
+          "backend/tests/test_issuance.py",
+          "frontend/src/api/issuance.ts",
+          "frontend/src/components/certificates/BulkIssue.vue",
+          "frontend/src/composables/useBulkIssue.ts"
+        ],
+        "integration_order": 1
+      }
+    },
+    {
+      "at": "2026-11-13T03:45:34+00:00",
+      "event": "WRITER_ASSIGNED",
+      "details": {
+        "writer_id": "t4",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t4\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+        "owned_paths": [
+          "backend/app/revocation.py",
+          "backend/T4-evidence.md",
+          "backend/tests/test_revocation.py",
+          "frontend/src/api/revocation.ts",
+          "frontend/src/components/certificates/RevokeCertificate.vue"
+        ],
+        "integration_order": 2
+      }
+    },
+    {
+      "at": "2026-11-13T03:45:35+00:00",
+      "event": "WRITER_ASSIGNED",
+      "details": {
+        "writer_id": "t6",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-t6\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+        "owned_paths": [
+          "backend/app/certificate_query.py",
+          "backend/app/csv_export.py",
+          "backend/T6-evidence.md",
+          "backend/tests/test_csv_export.py",
+          "frontend/src/api/export.ts",
+          "frontend/src/components/certificates/ExportCertificates.vue",
+          "scripts/benchmark_export.py",
+          "scripts/generate_export_fixture.py",
+          "tests/test_export_stream.py"
+        ],
+        "integration_order": 3
+      }
+    },
+    {
+      "at": "2026-11-13T03:45:36+00:00",
+      "event": "TRANSITION",
+      "details": {
+        "to": "EXECUTE",
+        "note": null
+      }
+    },
+    {
+      "at": "2026-11-13T03:55:28+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T03:55:29+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T03:55:29+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-3"
+      }
+    },
+    {
+      "at": "2026-11-13T03:55:30+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-4"
+      }
+    },
+    {
+      "at": "2026-11-13T03:56:40+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-114507-789367-t3-t4-t6-implementation-on-integrate\\verification\\20261113-115640-515825.md"
+      }
+    },
+    {
+      "at": "2026-11-13T04:02:48+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-114507-789367-t3-t4-t6-implementation-on-integrate\\verification\\20261113-120248-896975.md"
+      }
+    },
+    {
+      "at": "2026-11-13T04:03:00+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "pass",
+        "finding": null
+      }
+    },
+    {
+      "at": "2026-11-13T04:03:01+00:00",
+      "event": "DELIVERY_RECORDED",
+      "details": {
+        "status": "pending-acceptance"
+      }
+    },
+    {
+      "at": "2026-11-13T04:03:02+00:00",
+      "event": "CLOSED",
+      "details": {
+        "summary": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-114507-789367-t3-t4-t6-implementation-on-integrate\\summary.md"
+      }
+    }
+  ]
+}

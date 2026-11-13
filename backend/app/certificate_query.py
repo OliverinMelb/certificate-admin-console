@@ -31,8 +31,8 @@ def project(row, zone: ZoneInfo):
         raise HTTPException(status_code=500, detail="Invalid certificate timestamp") from exc
 
 
-def list_certificates(db, tenant_id: str, q: str, page: int, page_size: int,
-                      sort: str, order: str):
+def certificate_query(db, tenant_id: str, q: str, sort: str, order: str):
+    """Build the one tenant-filtered order used by both paged reads and CSV."""
     zone = tenant_zone(db, tenant_id)
     escaped = q.strip().replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
     pattern = f"%{escaped}%"
@@ -55,17 +55,27 @@ def list_certificates(db, tenant_id: str, q: str, page: int, page_size: int,
         db.create_function("tenant_local_date", 1,
                            local_date, deterministic=True)
     direction = "DESC" if order == "desc" else "ASC"
-    total = db.execute("SELECT COUNT(*) FROM (" + CERTIFICATE_SELECT + where + ")",
+    def check_dates():
+        if invalid_timestamp:
+            raise HTTPException(status_code=500, detail="Invalid certificate timestamp")
+
+    return (CERTIFICATE_SELECT + where, parameters,
+            f" ORDER BY {column} {direction}, c.id ASC", zone, check_dates)
+
+
+def list_certificates(db, tenant_id: str, q: str, page: int, page_size: int,
+                      sort: str, order: str):
+    query, parameters, ordering, zone, check_dates = certificate_query(db, tenant_id, q, sort, order)
+    total = db.execute("SELECT COUNT(*) FROM (" + query + ")",
                        parameters).fetchone()[0]
     offset = (page - 1) * page_size
     if offset >= total:
         return {"items": [], "total": total, "page": page, "page_size": page_size}
     items = [project(row, zone) for row in db.execute(
-        CERTIFICATE_SELECT + where + f" ORDER BY {column} {direction}, c.id ASC LIMIT ? OFFSET ?",
+        query + ordering + " LIMIT ? OFFSET ?",
         (*parameters, page_size, offset)
     )]
-    if invalid_timestamp:
-        raise HTTPException(status_code=500, detail="Invalid certificate timestamp")
+    check_dates()
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 

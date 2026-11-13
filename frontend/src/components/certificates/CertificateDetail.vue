@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { onMounted, useTemplateRef } from 'vue'
-import type { Certificate } from '../../api/certificates'
+import { formatUtc, type Certificate, type AuditEvent } from '../../api/certificates'
 import CertificateTime from './CertificateTime.vue'
-defineProps<{ item: Certificate | null; loading: boolean; error: string }>()
-const emit = defineEmits<{ close: []; retry: [] }>()
+import RevokeCertificate from './RevokeCertificate.vue'
+defineProps<{ actorId: string; item: Certificate | null; loading: boolean; error: string; audit: AuditEvent[]; auditLoading: boolean; auditError: string }>()
+const emit = defineEmits<{ close: []; retry: []; revoked: [] }>()
 const dialog = useTemplateRef<HTMLDialogElement>('dialog')
 onMounted(() => dialog.value?.showModal())
 </script>
 
 <template>
   <dialog ref="dialog" class="detail" aria-labelledby="detail-title" @cancel.prevent="emit('close')">
-    <header class="detail-header"><div><p class="muted">只读记录</p><h2 id="detail-title" class="section-title">证书详情</h2></div><button type="button" autofocus @click="emit('close')">关闭</button></header>
+    <header class="detail-header"><div><p class="muted">证书与操作记录</p><h2 id="detail-title" class="section-title">证书详情</h2></div><button type="button" autofocus @click="emit('close')">关闭</button></header>
     <p v-if="loading" role="status">正在加载详情…</p>
     <div v-else-if="error" role="alert" class="error"><p>{{ error }}</p><button type="button" @click="emit('retry')">重试详情</button></div>
     <dl v-else-if="item" class="fields">
@@ -23,6 +24,14 @@ onMounted(() => dialog.value?.showModal())
       <dt>状态</dt><dd>{{ item.status === 'ACTIVE' ? '有效' : '已撤销' }}</dd>
       <dt>证书 ID</dt><dd>{{ item.id }}</dd>
     </dl>
+    <template v-if="item && !loading && !error">
+      <RevokeCertificate :actor-id="actorId" :certificate-id="item.id" :status="item.status" @revoked="emit('revoked')" />
+      <h3>审计记录</h3>
+      <p v-if="auditLoading" role="status">正在加载审计…</p>
+      <p v-else-if="auditError" role="alert">{{ auditError }} <button @click="emit('retry')">重试审计</button></p>
+      <ul v-else-if="audit.length"><li v-for="event in audit" :key="event.id">{{ event.event_type === 'ISSUED' ? '发证' : '撤销' }} · {{ event.actor_id }} · {{ formatUtc(event.occurred_at) }}</li></ul>
+      <p v-else class="muted">暂无操作记录（演示种子证书未生成历史审计）。</p>
+    </template>
   </dialog>
 </template>
 

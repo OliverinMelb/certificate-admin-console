@@ -17,8 +17,8 @@ def client(database):
         yield client
 
 
-ALICE = {"X-Actor-Id": "alice"}
-BOB = {"X-Actor-Id": "bob"}
+ALICE = {"X-Actor-Id": "alice", "Idempotency-Key": "initial"}
+BOB = {"X-Actor-Id": "bob", "Idempotency-Key": "initial"}
 
 
 def test_issue_only_completed_never_certified_enrollments(client):
@@ -56,7 +56,7 @@ def test_issue_audit_is_single_and_repeated_issue_skips(client):
     assert events[0]["event_type"] == "ISSUED"
     assert events[0]["actor_id"] == "alice"
     assert events[0]["certificate_id"] == certificate_id
-    repeated = client.post("/api/courses/east-safety/issue", headers=ALICE)
+    repeated = client.post("/api/courses/east-safety/issue", headers={**ALICE, "Idempotency-Key": "new-operation"})
     assert repeated.status_code == 200
     assert all(item["outcome"] == "skipped" for item in repeated.json()["outcomes"])
     assert client.get(f"/api/certificates/{certificate_id}/audit", headers=ALICE).json()["items"] == events

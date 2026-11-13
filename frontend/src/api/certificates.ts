@@ -7,6 +7,7 @@ export interface Actor {
 }
 
 export interface Course { id: string; title: string }
+export interface AuditEvent { id: string; actor_id: string; event_type: 'ISSUED' | 'REVOKED'; occurred_at: string }
 export interface Certificate {
   id: string
   serial_number: string

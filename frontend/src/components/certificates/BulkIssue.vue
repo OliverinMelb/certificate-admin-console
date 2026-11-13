@@ -12,6 +12,7 @@ watch(() => props.actorId, () => { courseId.value = '' }, { flush: 'sync' })
 watch(() => props.courses, (courses) => {
   if (!courses.some((course) => course.id === courseId.value)) courseId.value = courses[0]?.id ?? ''
 }, { immediate: true })
+watch(courseId, () => state.clear(), { flush: 'sync' })
 
 function changeCourse(event: Event) {
   courseId.value = (event.target as HTMLSelectElement).value
@@ -30,10 +31,12 @@ function changeCourse(event: Event) {
           <option v-for="course in courses" :key="course.id" :value="course.id">{{ course.title }}</option>
         </select>
       </label>
-      <button type="submit" :disabled="state.busy || !actorId || !courseId">{{ state.busy ? '正在发证…' : '批量发证' }}</button>
+      <button type="submit" :disabled="state.busy || !actorId || !courseId">{{ state.busy ? '正在发证…' : state.result || state.error ? '重新发起发证' : '批量发证' }}</button>
+      <button v-if="state.canRetry" type="button" @click="state.retry()">重试原操作</button>
     </form>
     <p v-if="state.busy" role="status">正在处理课程报名，请等待结果。</p>
     <p v-if="state.error" role="alert" class="error">{{ state.error }}</p>
+    <p v-if="state.canRetry" class="muted">重试原操作会获取首次结果；重新发起发证会再次检查当前课程的报名。</p>
     <div v-if="state.result" class="outcomes">
       <p role="status">处理完成，共 {{ state.result.outcomes.length }} 名学员。</p>
       <p v-if="!state.result.outcomes.length" class="muted">此课程暂无报名学员。</p>

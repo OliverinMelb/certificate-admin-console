@@ -1,0 +1,277 @@
+- main:
+  - paragraph: CERTIFICATE ADMIN CONSOLE
+  - heading "证书管理后台" [level=1]
+  - paragraph: 管理培训证书，让每一次学习成果都有据可查。
+  - region "工作空间":
+    - heading "工作空间" [level=2]
+    - paragraph: 演示身份 · 仅查看所属租户的数据
+    - text: 演示管理员
+    - combobox "演示管理员":
+      - option "alice@east.test · East" [selected]
+      - option "bob@west.test · West"
+    - heading "当前租户课程" [level=3]
+    - list:
+      - listitem: Safety 101
+  - region "批量发证":
+    - heading "批量发证" [level=2]
+    - paragraph: 为完成课程且从未获证的学员发证；已有证书（含已撤销）会跳过。
+    - text: 发证课程
+    - combobox "发证课程":
+      - option "Safety 101" [selected]
+    - button "重新发起发证"
+    - status: 处理完成，共 14 名学员。
+    - list "逐学员发证结果":
+      - strong: east-learner-001
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-002
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-003
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-004
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-005
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-006
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-007
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-008
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-009
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-010
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-011
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-012
+      - generic: skipped · 已有证书（含已撤销），不重复发证
+      - strong: east-learner-013
+      - generic: issued · 发证成功
+      - strong: east-learner-014
+      - generic: skipped · 尚未完成课程
+  - region "已颁发证书":
+    - heading "已颁发证书" [level=2]
+    - generic: East
+    - paragraph: 浏览学员证书与颁发记录。颁发日期和时间按当前租户时区显示。
+    - text: 搜索证书
+    - searchbox "搜索证书"
+    - text: 排序字段
+    - combobox "排序字段":
+      - option "证书编号" [selected]
+      - option "学员姓名"
+      - option "颁发日期（租户当地）"
+    - text: 排序方向
+    - combobox "排序方向":
+      - option "升序" [selected]
+      - option "降序"
+    - button "导出全部匹配 CSV"
+    - region "证书列表，可横向滚动":
+      - table:
+        - rowgroup:
+          - row "证书编号 学员 课程 颁发时间（租户当地） 状态 详情":
+            - columnheader "证书编号"
+            - columnheader "学员"
+            - columnheader "课程"
+            - columnheader "颁发时间（租户当地）"
+            - columnheader "状态"
+            - columnheader "详情"
+        - rowgroup:
+          - row "EAST-001 Alex Lee Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 已撤销 查看证书 EAST-001 的详情":
+            - cell "EAST-001"
+            - cell "Alex Lee"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "已撤销":
+              - generic: 已撤销
+            - cell "查看证书 EAST-001 的详情":
+              - button "查看证书 EAST-001 的详情": 查看详情
+          - row "EAST-002 Alex Lee Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-002 的详情":
+            - cell "EAST-002"
+            - cell "Alex Lee"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-002 的详情":
+              - button "查看证书 EAST-002 的详情": 查看详情
+          - row "EAST-003 Case 100%_\\ Complete Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-003 的详情":
+            - cell "EAST-003"
+            - cell "Case 100%_\\ Complete"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-003 的详情":
+              - button "查看证书 EAST-003 的详情": 查看详情
+          - row "EAST-004 Learner 004 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-004 的详情":
+            - cell "EAST-004"
+            - cell "Learner 004"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-004 的详情":
+              - button "查看证书 EAST-004 的详情": 查看详情
+          - row "EAST-005 Learner 005 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-005 的详情":
+            - cell "EAST-005"
+            - cell "Learner 005"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-005 的详情":
+              - button "查看证书 EAST-005 的详情": 查看详情
+          - row "EAST-006 Learner 006 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-006 的详情":
+            - cell "EAST-006"
+            - cell "Learner 006"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-006 的详情":
+              - button "查看证书 EAST-006 的详情": 查看详情
+          - row "EAST-007 Learner 007 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-007 的详情":
+            - cell "EAST-007"
+            - cell "Learner 007"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-007 的详情":
+              - button "查看证书 EAST-007 的详情": 查看详情
+          - row "EAST-008 Learner 008 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-008 的详情":
+            - cell "EAST-008"
+            - cell "Learner 008"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-008 的详情":
+              - button "查看证书 EAST-008 的详情": 查看详情
+          - row "EAST-009 Learner 009 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-009 的详情":
+            - cell "EAST-009"
+            - cell "Learner 009"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-009 的详情":
+              - button "查看证书 EAST-009 的详情": 查看详情
+          - row "EAST-010 Learner 010 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-010 的详情":
+            - cell "EAST-010"
+            - cell "Learner 010"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-010 的详情":
+              - button "查看证书 EAST-010 的详情": 查看详情
+          - row "EAST-011 Learner 011 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-011 的详情":
+            - cell "EAST-011"
+            - cell "Learner 011"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-011 的详情":
+              - button "查看证书 EAST-011 的详情": 查看详情
+          - row "EAST-012 Learner 012 Safety 101 2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney 有效 查看证书 EAST-012 的详情":
+            - cell "EAST-012"
+            - cell "Learner 012"
+            - cell "Safety 101"
+            - cell "2026-01-11 2026-01-11 00:30:00+11:00 Australia/Sydney":
+              - time: 2026-01-11
+              - generic: 2026-01-11 00:30:00+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 EAST-012 的详情":
+              - button "查看证书 EAST-012 的详情": 查看详情
+          - row "ca57e31d-7c47-4703-944d-d603187636f4 Learner 013 Safety 101 2026-11-13 2026-11-13 14:56:42.854877+11:00 Australia/Sydney 有效 查看证书 ca57e31d-7c47-4703-944d-d603187636f4 的详情":
+            - cell "ca57e31d-7c47-4703-944d-d603187636f4"
+            - cell "Learner 013"
+            - cell "Safety 101"
+            - cell "2026-11-13 2026-11-13 14:56:42.854877+11:00 Australia/Sydney":
+              - time: 2026-11-13
+              - generic: 2026-11-13 14:56:42.854877+11:00
+              - generic: Australia/Sydney
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 ca57e31d-7c47-4703-944d-d603187636f4 的详情":
+              - button "查看证书 ca57e31d-7c47-4703-944d-d603187636f4 的详情": 查看详情
+    - navigation "证书分页":
+      - text: 每页
+      - combobox "每页证书数":
+        - option "5"
+        - option "10"
+        - option "50" [selected]
+        - option "100"
+      - text: 条
+      - status: 共 13 条 · 第 1 / 1 页
+      - button "上一页" [disabled]
+      - button "下一页" [disabled]
+  - dialog "证书详情":
+    - paragraph: 证书与操作记录
+    - heading "证书详情" [level=2]
+    - button "关闭"
+    - term: 证书编号
+    - definition: EAST-001
+    - term: 学员姓名
+    - definition: Alex Lee
+    - term: 学员 ID
+    - definition: east-learner-001
+    - term: 课程
+    - definition: Safety 101
+    - term: 课程 ID
+    - definition: east-safety
+    - term: 颁发时间（租户当地）
+    - definition:
+      - time: 2026-01-11
+      - generic: 2026-01-11 00:30:00+11:00
+      - generic: Australia/Sydney
+    - term: 状态
+    - definition: 已撤销
+    - term: 证书 ID
+    - definition: east-cert-001
+    - status: 证书已撤销，不能恢复或重新发证。
+    - heading "审计记录" [level=3]
+    - list:
+      - listitem: 撤销 · alice · 2026-11-13 03:57:48 UTC
+  - region "服务连接":
+    - heading "服务连接" [level=2]
+    - status:
+      - generic: 服务已连接
+    - button "重新检查"

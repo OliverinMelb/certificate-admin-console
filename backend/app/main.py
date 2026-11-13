@@ -2,9 +2,14 @@ from pathlib import Path
 from contextlib import asynccontextmanager
 from typing import Literal
 
-from fastapi import FastAPI, HTTPException, Header, Query
+from fastapi import FastAPI, HTTPException, Header, Query, Body, Request
+from pydantic import BaseModel, ConfigDict
 from fastapi.staticfiles import StaticFiles
 from app.database import connect, initialize
+
+
+class EmptyOperation(BaseModel):
+    model_config = ConfigDict(extra="forbid")
 
 
 def create_app(database_path: str | Path | None = None) -> FastAPI:
@@ -16,9 +21,11 @@ def create_app(database_path: str | Path | None = None) -> FastAPI:
     async def lifespan(app: FastAPI):
         initialize(database)
         from app.issuance import initialize_issuance
+        from app.idempotency import initialize_idempotency
         with connect(database) as db, db:
             db.execute("BEGIN")
             initialize_issuance(db)
+            initialize_idempotency(db)
         yield
 
     app = FastAPI(title="Certificate Admin Console", lifespan=lifespan)
@@ -48,6 +55,18 @@ def create_app(database_path: str | Path | None = None) -> FastAPI:
             tenant = tenant_for(db, x_actor_id)
             return list_certificates(db, tenant, q, page, page_size, sort, order)
 
+    @app.get("/api/certificates/export.csv")
+    def export(request: Request, q: str = "",
+               sort: Literal["learner_name", "serial_number", "issue_date"] = "serial_number",
+               order: Literal["asc", "desc"] = "asc",
+               x_actor_id: str | None = Header(default=None)):
+        from app.csv_export import export_csv
+        with connect(database) as db:
+            tenant = tenant_for(db, x_actor_id)
+        if "page" in request.query_params or "page_size" in request.query_params:
+            raise HTTPException(status_code=422, detail="CSV export does not accept pagination")
+        return export_csv(database, tenant, q, sort, order)
+
     @app.get("/api/certificates/{certificate_id}")
     def certificate_detail(certificate_id: str, x_actor_id: str | None = Header(default=None)):
         from app.certificate_query import get_certificate
@@ -56,11 +75,24 @@ def create_app(database_path: str | Path | None = None) -> FastAPI:
             return get_certificate(db, tenant, certificate_id)
 
     @app.post("/api/courses/{course_id}/issue")
-    def issue(course_id: str, x_actor_id: str | None = Header(default=None)):
-        from app.issuance import issue_course
+    def issue(course_id: str, x_actor_id: str | None = Header(default=None),
+              idempotency_key: str | None = Header(default=None),
+              body: EmptyOperation | None = Body(default=None)):
+        from app.idempotency import issue_idempotent
         with connect(database) as db:
             tenant = tenant_for(db, x_actor_id)
-            return issue_course(db, tenant, x_actor_id, course_id)
+            if (not idempotency_key or not idempotency_key.strip() or len(idempotency_key) > 128
+                    or any(ord(c) < 32 or ord(c) > 126 for c in idempotency_key)):
+                raise HTTPException(status_code=422, detail="Idempotency-Key must be 1-128 printable ASCII characters")
+            return issue_idempotent(db, tenant, x_actor_id, course_id, idempotency_key)
+
+    @app.post("/api/certificates/{certificate_id}/revoke")
+    def revoke(certificate_id: str, x_actor_id: str | None = Header(default=None),
+               body: EmptyOperation | None = Body(default=None)):
+        from app.revocation import revoke_certificate
+        with connect(database) as db:
+            tenant = tenant_for(db, x_actor_id)
+            return revoke_certificate(db, tenant, x_actor_id, certificate_id)
 
     @app.get("/api/certificates/{certificate_id}/audit")
     def audit(certificate_id: str, x_actor_id: str | None = Header(default=None)):

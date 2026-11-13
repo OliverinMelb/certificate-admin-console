@@ -7,16 +7,18 @@ export interface IssueOutcome {
 
 export interface IssueResult { course_id: string; outcomes: IssueOutcome[] }
 
-export async function issueCourse(actorId: string, courseId: string, signal: AbortSignal): Promise<IssueResult> {
+export async function issueCourse(actorId: string, courseId: string, key: string, signal: AbortSignal): Promise<IssueResult> {
   const response = await fetch(`/api/courses/${encodeURIComponent(courseId)}/issue`, {
     method: 'POST',
-    headers: { 'X-Actor-Id': actorId },
+    headers: { 'X-Actor-Id': actorId, 'Idempotency-Key': key },
     signal,
   })
   if (!response.ok) {
     if (response.status === 401) throw new Error('身份无效，请重新选择演示身份。')
     if (response.status === 404) throw new Error('课程不存在，或当前身份无权发证。')
-    throw new Error('未取得发证结果，请检查证书列表后再决定是否重试。')
+    if (response.status === 409) throw new Error('此操作标识已用于不同请求，请重新发起操作。')
+    if (response.status === 503) throw new Error('服务暂时不可用，请稍后重试原操作。')
+    throw new Error('未取得发证结果，可重试原操作获取结果。')
   }
   return response.json() as Promise<IssueResult>
 }

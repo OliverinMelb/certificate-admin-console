@@ -2,11 +2,12 @@
 
 独立的多租户培训证书后台项目。已确定 Vue 3 + FastAPI + SQLite；使用 SDD + TDD 和 codex-workflow，逐项确认技术方案后开发。
 
-当前状态：T1 已通过用户浏览器验收并保存为本地基线 1b30bbe。T2、T5 在独立 worktree 并行开发并由 certificate-verification 集成；执行证据见 workflow/tasks/20261113-112716-944318-t2-t5-parallel-issuance-and-tenant-d/。Desktop 主目录仍为 T0；未推远端。
+当前状态：T2/T5 已集成并保存为本地基线 746edee。T3/T4/T6 已在三个独立worktree开发并集成，接口/启动/浏览器检查及独立代码审查通过，业务验收待用户确认；最终记录以 workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/ 为准。本次授权将通过本地提交与快进合并同步到 Desktop 主目录的 main；提交结果以Git日志为准，未推远端。
 
 - [轻量规格](spec.md)：功能范围、A1～A7、接口草案、影响范围与验证策略。
 - [开发任务](tasks.md)：T0～T7、依赖、确认点和完成条件。
 - [决策记录](decisions.md)：已确认内容与待确认方案。
+- [整体验收索引](docs/acceptance.md)：A1～A7复现入口、实测证据和交付限制。
 
 ## 开发约定
 
@@ -48,7 +49,7 @@ curl.exe -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/certificates?q=Alex"
 curl.exe -H "X-Actor-Id: bob" "http://127.0.0.1:8000/api/certificates/east-cert-001"
 ```
 
-第二个请求应返回404；同一ID由Alice访问应成功。伪造tenant_id查询参数不能扩大所属租户范围。此复现覆盖 A1 读取部分。发证越租户行为另见下文，导出仍待 T6。
+第二个请求应返回404；同一ID由Alice访问应成功。伪造tenant_id查询参数不能扩大所属租户范围。此复现覆盖 A1 读取部分。发证越租户行为另见下文，导出使用相同租户隔离。
 
 ## 验证
 
@@ -64,15 +65,15 @@ GET /api/health 返回 `{"status":"ok"}`，只表示进程健康。未知 /api �
 
 ## 待交付
 
-剩余 A1 导出场景、A2/A3 幂等、A5 CSV 部分、A6 性能、A7 撤销、完整业务复现、大数据生成、完整AI原始活动证据及索引。任务内执行摘要不能替代原始会话导出。原题书面题由候选人独立完成，不生成答案或完成声明。
+T3/T4/T6 已覆盖幂等、撤销、CSV及十万行场景。剩余T7最终交付整理、用户业务验收、完整AI原始活动证据及索引。任务内执行摘要不能替代原始会话导出。原题书面题由候选人独立完成，不生成答案或完成声明。
 
 ## T2 / T5 新增行为
 
 选择管理员和课程后，点击批量发证；仅完成课程且从未获证的学员可获证。已有证书（包括已撤销）和未完成学员跳过。结果逐人列出状态及原因，成功后刷新证书列表；身份切换清空旧操作结果。
 
 ```text
-curl.exe -X POST -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/courses/east-safety/issue"
-curl.exe -X POST -H "X-Actor-Id: bob" "http://127.0.0.1:8000/api/courses/east-safety/issue"
+curl.exe -X POST -H "Idempotency-Key: demo-issue-1" -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/courses/east-safety/issue"
+curl.exe -X POST -H "Idempotency-Key: demo-issue-1" -H "X-Actor-Id: bob" "http://127.0.0.1:8000/api/courses/east-safety/issue"
 curl.exe -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/certificates?sort=issue_date&order=asc"
 ```
 
@@ -80,4 +81,23 @@ curl.exe -H "X-Actor-Id: alice" "http://127.0.0.1:8000/api/certificates?sort=iss
 
 UTC 2026-01-10T13:30:00Z 在 Sydney 显示 2026-01-11 00:30（+11:00），在 Perth 显示 2026-01-10 21:30（+08:00）。日期排序按当地日历日，同日按唯一 ID 升序；日期计算发生在数据库分页前。
 
-数据库唯一约束不等于幂等结果重放。T3 前，重复提交可能返回 skipped；网络中断后应先核对列表，不承诺返回第一次操作的原始结果。T5 计算日期排序尚未进行十万行性能验证，CSV 仍待 T6。已有重复证书的旧库会在新增唯一索引时明确失败，不自动清理数据。
+T3发证必须携带1～128字符的非空可打印ASCII Idempotency-Key。同一租户/管理员/操作/key重试返回首次结果；换课程409，未知body字段422。网络失败在页面选择“重试原操作”沿用key；新操作使用新key，刷新页面不保留重试上下文。已有重复证书的旧库会在新增唯一索引时明确失败，不自动清理数据。
+
+## T4 撤销与 T6 导出
+
+撤销：POST /api/certificates/{id}/revoke，空body或{}，同样携带演示身份头。有效证书首次changed:true，重复changed:false，均返回200；详情审计只新增一次REVOKED。撤销后不恢复、不重新发证。UI先确认，再刷新详情、审计与列表。
+
+CSV：GET /api/certificates/export.csv?q=&sort=issue_date&order=asc，携带演示身份头。导出全部匹配，包含撤销项，不接受page/page_size。四列为learner_name,course_title,serial_number,issued_local_date；UTF-8 BOM/CRLF；危险公式前缀文本加单引号（不改变数据库原值）。服务端有界分批快照读取，浏览器Blob下载按文件大小占用内存。
+
+SQLite启用WAL，每连接busy_timeout=5000ms。已核对本机Python3.14.6链接SQLite3.50.4，官方披露罕见WAL-reset竞态，修复版本为3.50.7或3.51.3及以后：https://www.sqlite.org/wal.html 。本轮未升级已批准运行时，不能将本地测试等同生产可靠性承诺。仅Windows实测；演示身份不是生产认证。
+
+## 独立性能复现
+
+下面命令只生成显式指定的新文件库；已有文件会拒绝覆盖，不修改默认演示库。基准脚本启动自己的临时端口服务并在结束时停止；100000行完整导出两次及过滤导出另行计时。
+
+```powershell
+backend/.venv/Scripts/python.exe scripts/generate_export_fixture.py --database .smoke/export-performance.sqlite3 --rows 100000
+backend/.venv/Scripts/python.exe scripts/benchmark_export.py --database .smoke/export-performance.sqlite3 --rows 100000
+```
+
+快速检查仍使用 `node scripts/check.mjs`；十万行性能脚本不自动重复运行。CSV取消/快照并发通过tests/test_export_stream.py的真实TCP服务验证，普通API通过文件SQLite+HTTP验证。

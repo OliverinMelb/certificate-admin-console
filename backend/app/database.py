@@ -10,6 +10,7 @@ def connect(path: Path):
     connection = sqlite3.connect(path)
     connection.row_factory = sqlite3.Row
     connection.execute("PRAGMA foreign_keys = ON")
+    connection.execute("PRAGMA busy_timeout = 5000")
     try:
         yield connection
     finally:
@@ -18,6 +19,8 @@ def connect(path: Path):
 
 def initialize(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    with connect(path) as db:
+        db.execute("PRAGMA journal_mode = WAL")
     with connect(path) as db, db:
         db.execute("BEGIN")
         db.execute("""CREATE TABLE IF NOT EXISTS tenant (

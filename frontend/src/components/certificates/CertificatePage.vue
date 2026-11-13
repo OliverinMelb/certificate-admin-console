@@ -7,6 +7,7 @@ import CertificateFilters from './CertificateFilters.vue'
 import CertificateTable from './CertificateTable.vue'
 import CertificatePagination from './CertificatePagination.vue'
 import CertificateDetail from './CertificateDetail.vue'
+import ExportCertificates from './ExportCertificates.vue'
 
 const state = reactive(useCertificates())
 </script>
@@ -22,13 +23,15 @@ const state = reactive(useCertificates())
       <p class="muted">浏览学员证书与颁发记录。颁发日期和时间按当前租户时区显示。</p>
       <CertificateFilters :query="state.query" :sort="state.sort" :order="state.order" :disabled="!state.actorId"
         @search="state.search" @sort="state.changeSort" @order="state.changeOrder" />
+      <ExportCertificates :actor-id="state.actorId" :q="state.query" :sort="state.sort" :order="state.order" />
       <CertificateTable :items="state.certificates.data.items" :loading="state.busy" :error="state.certificates.error" :has-actor="!!state.actorId"
         @detail="state.openDetail" @retry="state.loadList" />
       <CertificatePagination :page="state.page" :page-size="state.pageSize" :total="state.certificates.data.total"
         :disabled="state.busy" :unavailable="!state.actorId || !!state.certificates.error" @page="state.changePage" @page-size="state.changePageSize" />
     </section>
-    <CertificateDetail v-if="state.detailId" :item="state.detail.data" :loading="state.detail.loading" :error="state.detail.error"
-      @close="state.closeDetail" @retry="state.openDetail(state.detailId)" />
+    <CertificateDetail v-if="state.detailId" :actor-id="state.actorId" :item="state.detail.data" :loading="state.detail.loading" :error="state.detail.error"
+      :audit="state.audit.data.items" :audit-loading="state.audit.loading" :audit-error="state.audit.error"
+      @close="state.closeDetail" @retry="state.openDetail(state.detailId)" @revoked="state.openDetail(state.detailId); state.loadList()" />
   </div>
 </template>
 

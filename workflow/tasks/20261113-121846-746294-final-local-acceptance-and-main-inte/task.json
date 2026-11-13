@@ -1,0 +1,442 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-121846-746294-final-local-acceptance-and-main-inte",
+  "title": "Final local acceptance and main integration",
+  "tier": "small",
+  "workflow_class": "app-change",
+  "state": "CLOSED",
+  "created_at": "2026-11-13T04:18:46+00:00",
+  "updated_at": "2026-11-13T04:21:04+00:00",
+  "workspace": {
+    "kind": "linked-worktree",
+    "branch": null,
+    "detached": true,
+    "head_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+    "dirty_fingerprint": "b5ed609fd6412f9034197c3845d9ea1c29c1dcc25a4a4fc061661c9b52ca56bc",
+    "dirty_entries": [
+      {
+        "status": " M",
+        "path": ".scratch/certificate-admin/issues/T3.md",
+        "hash": "4901579ae3d506c025366e2beddc3c0a0615fed21a0db1928602fd47525c528e"
+      },
+      {
+        "status": " M",
+        "path": ".scratch/certificate-admin/issues/T4.md",
+        "hash": "e3cfb67016338dc4d6582ce90f8c5acc6d025db4ff655c8f09e280772d044b02"
+      },
+      {
+        "status": " M",
+        "path": ".scratch/certificate-admin/issues/T6.md",
+        "hash": "c826097cc94cd3ce63d7d239f378c8febf6cd141d0461c7491f1a2e032fd06fd"
+      },
+      {
+        "status": " M",
+        "path": "README.md",
+        "hash": "ff28b43e4f6f2f3d79f6041eb82ab6162c0a894e6ef78d20ac4347811dcec253"
+      },
+      {
+        "status": "??",
+        "path": "backend/T3-evidence.md",
+        "hash": "c3951ac161d82278743a0dfaef1aee91556e2f0d2654496233d067e27556c720"
+      },
+      {
+        "status": "??",
+        "path": "backend/T4-evidence.md",
+        "hash": "bb762e427f0fb8b87d9f73ec22bc3699d3d28dbcdb4793cf87e80c0e72462874"
+      },
+      {
+        "status": "??",
+        "path": "backend/T6-evidence.md",
+        "hash": "fb2adf4c405d8d87a44d0d5bb594d318f614706c26d8b2de9244ae55757cc781"
+      },
+      {
+        "status": " M",
+        "path": "backend/app/certificate_query.py",
+        "hash": "a20e8c11d0b532bcc254e1e9d008b3caa9b8033e60a0ad33c545d4899fd17bf3"
+      },
+      {
+        "status": "??",
+        "path": "backend/app/csv_export.py",
+        "hash": "3750b900ad5c08ca6da3573f470debfa8e3c555461c345866014b79ad5072805"
+      },
+      {
+        "status": " M",
+        "path": "backend/app/database.py",
+        "hash": "c4d564b5c1c4b4a1824477c99924bb9aa0c8fe82ca8158d8918904993a8a953e"
+      },
+      {
+        "status": "??",
+        "path": "backend/app/idempotency.py",
+        "hash": "f787b571ae14a8c01163c5f6659c3d00598e9f954febcf08421f063515508fa9"
+      },
+      {
+        "status": " M",
+        "path": "backend/app/issuance.py",
+        "hash": "ef1b824d1b3314248b046b0959d5a831861a4a94138a160fe3440d856066034a"
+      },
+      {
+        "status": " M",
+        "path": "backend/app/main.py",
+        "hash": "fba74a18d85d84369cdc5b0660d47245617fdfaa42d83bc549fa1cc512837fb6"
+      },
+      {
+        "status": "??",
+        "path": "backend/app/revocation.py",
+        "hash": "906ec173e7720d4749bedfbce2b4487795402d5e6822fe22b5a81322ddc7e0db"
+      },
+      {
+        "status": "??",
+        "path": "backend/tests/test_csv_export.py",
+        "hash": "e9520ce66c1bded71196a73d5b7ac22962a5c77c374c48bf6864cc18fb4fa4f7"
+      },
+      {
+        "status": "??",
+        "path": "backend/tests/test_idempotency.py",
+        "hash": "c2ffe989615dadd2e3ef05818a809688cc74001f8e8579f38486bf14db8da1cf"
+      },
+      {
+        "status": " M",
+        "path": "backend/tests/test_issuance.py",
+        "hash": "0bccf79e6fed95ac620589b3c99f95a77021486c28bf4d565f5ef01d1e2d204f"
+      },
+      {
+        "status": "??",
+        "path": "backend/tests/test_revocation.py",
+        "hash": "f916ae82e98fad023e29231e75802c319f5ed151032e7ecbd455a765d6ffe73d"
+      },
+      {
+        "status": "??",
+        "path": "backend/tests/test_workflow_integration.py",
+        "hash": "61b7a99a4c624124f6b773973d694df39b6f30867ee248ab53e629651833e7d4"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/api/certificates.ts",
+        "hash": "52c04b7c568e868745687df161049729559c58d8654d542dee0a7892836b6529"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/api/export.ts",
+        "hash": "a7ab49a866dc673febc2921e8fe8b94bf684965e22cbf4a32e25160d393136a4"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/api/issuance.ts",
+        "hash": "f1f705d79095d56a56ebefc6f3c33ee98d6e769eba0a6f6680cbdefb8f72a985"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/api/revocation.ts",
+        "hash": "309d6293f6507c5958175cb63d1ef9c34ca02215cb0be7b9da435f0024f90724"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/components/certificates/BulkIssue.vue",
+        "hash": "43c9e6ddc77c0708990439e43da8f941a74a18548662a327b5d7974f379601fc"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/components/certificates/CertificateDetail.vue",
+        "hash": "c7769968d3935617638b1c9879ec824903606a1608df694a7b1711b261027498"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/components/certificates/CertificatePage.vue",
+        "hash": "88b244171a4507e9380756794ab0a161ef2135abb4dd0cd09dc4b4a4a5297889"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/components/certificates/ExportCertificates.vue",
+        "hash": "340f69ad8c8958a6061f357783aca556aac9ff9197cddbeee30510a3c1086e48"
+      },
+      {
+        "status": "??",
+        "path": "frontend/src/components/certificates/RevokeCertificate.vue",
+        "hash": "6969bd0b99f141f92e5d3e8af8a841a067877176ff11dd7c95615970d0e550ff"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/composables/useBulkIssue.ts",
+        "hash": "9369b4792c3adfa5c120d58ed3507abb76f5d7dd779cd698fd7acbcd0714b46d"
+      },
+      {
+        "status": " M",
+        "path": "frontend/src/composables/useCertificates.ts",
+        "hash": "838d32198b7fd784515258f1f14a3f1ae147a62e180b54c58654fabf32aa0aaa"
+      },
+      {
+        "status": "??",
+        "path": "scripts/benchmark_export.py",
+        "hash": "1f871f87559a614b86a4747bf646e2880e7be31f7a5b9e5e9f5bd7b2b43b3561"
+      },
+      {
+        "status": "??",
+        "path": "scripts/generate_export_fixture.py",
+        "hash": "9e22800f728cf6445d0d9736ee7b512c284d6166da6bf61e30578103aa8bcd64"
+      },
+      {
+        "status": " M",
+        "path": "spec.md",
+        "hash": "62e81e0d77c0503383b5953b988dd03d43c3c6723a75790812b132883c30cad4"
+      },
+      {
+        "status": " M",
+        "path": "tasks.md",
+        "hash": "72d22df213e11063c8698e9a212080470ba60f3b77027ed35df37a13351bc7bd"
+      },
+      {
+        "status": " M",
+        "path": "tests/browser_proxy.py",
+        "hash": "f871c225de42f436f677aa78f0b693466f00fa1fad50cb6e7ed0b3d228b6dcc5"
+      },
+      {
+        "status": "??",
+        "path": "tests/test_export_stream.py",
+        "hash": "93f8511cbcca3ec739f92fc45b5b5b798c2ad9a45632c55907a1f124e8e89e12"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/brief.md",
+        "hash": "9455ce559d3646ab456b8b3ba073846334edcf0cbc1fe1eacfd772385de9d6d5"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/browser-downloaded.csv",
+        "hash": "b48b1bf9c9c9dd2c2dc57504c211a45baf336cb6b6ff9e0a51e8a2f81d839879"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/browser-final.png",
+        "hash": "16b8484eb7f8a960e9aa6ef07b8d6407310303e0bc239cc87f01f1b1886e819e"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/browser-final.txt",
+        "hash": "e05f79811cc5c2bc6f67affe5f46237567675aa123bbff66f75e28f720a1d845"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/browser-revocation.png",
+        "hash": "5cc8524b10fe3a8eae202fc08900623ee391cffd4c5d47c1e5dfaf3035f4e804"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/browser-revocation.txt",
+        "hash": "bb6cd33d91f14fd29173c9ddc719938ac29a79d88fbf604b19bd6a9df4c79947"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/evidence.md",
+        "hash": "f52fbab197bb960d6677622e58fbe09de328792e2e83414b609955d1b34df0bf"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/planning.md",
+        "hash": "4fe111482f72fc2eb6a0a7807630f1eef499fd131fddc2a9dbeb3226fbc138b5"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/spec.md",
+        "hash": "959b6492abb7400fc60c0ebc31d7126607cd17c7ee5d1db8766422e736c7806b"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/summary.md",
+        "hash": "fb849c5cd3b79c13ca99acbaa238eea355cdaac335bc4baa5ed4772dfdaa2d53"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/task.json",
+        "hash": "5ddb19605c0a8fe2bad52b4c841f3dced95f5258662f686f3f47ec1a714e1515"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/verification/20261113-115640-515825.json",
+        "hash": "28587ca15ca3fb3215867aaedd2307c77882f84f1cf7460c4b8b86c0b2664b3f"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/verification/20261113-115640-515825.md",
+        "hash": "c35e696f5cce9c9e4eff2581f40748c66e977b93f4f71d615bc78e310630e261"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/verification/20261113-120248-896975.json",
+        "hash": "40cbe68193cd866d7c87073b35ae588874dd049ea532eb0649c7dbca9f4041b3"
+      },
+      {
+        "status": "??",
+        "path": "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/verification/20261113-120248-896975.md",
+        "hash": "367503026e5bceba5d3f991dc7a9d7af58b11137c5a99099c4c5238d14912eae"
+      }
+    ],
+    "base_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch",
+      "decisions.md",
+      "docs",
+      "README.md",
+      "spec.md",
+      "tasks.md",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [],
+    "source_refs": [
+      "workflow/tasks/20261113-114507-789367-t3-t4-t6-implementation-on-integrate/evidence.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": []
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "User authorizes local overall acceptance, commit and merge. Reuse approved test boundaries and existing independent code reviews; no business change, no push."
+    ],
+    "acceptance_criteria": [
+      "Full configured checks pass on final integrated sources; existing A1-A7 evidence indexed with limitations",
+      "Only authorized project files committed; main fast-forward receives same source tree and both checkouts clean"
+    ],
+    "spec_ref": null,
+    "multi_session": false,
+    "tickets": []
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 0,
+    "verification_attempts": 1
+  },
+  "verification": {
+    "latest": {
+      "result": "PASS",
+      "verification_id": "20261113-122044-631682",
+      "head_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+      "dirty_fingerprint": "d28ea77394a2cf217a36d216c68ec1c5aaa210f39dff3b7c5cf7d7c06a5e7756",
+      "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+      "planning_sha256": "cecec84987bd62109707457fd7d44429467286cbf7b2a567a3a50951407bdc47",
+      "evidence": "workflow/tasks/20261113-121846-746294-final-local-acceptance-and-main-inte/verification/20261113-122044-631682.md",
+      "acceptance_coverage": {
+        "status": "covered",
+        "errors": [],
+        "pending": []
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "AC-1": {
+      "criterion": "Full configured checks pass on final integrated sources; existing A1-A7 evidence indexed with limitations",
+      "implementation_refs": [
+        "docs/acceptance.md"
+      ],
+      "check_refs": [
+        "frontend-types",
+        "frontend-build",
+        "http-contracts",
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-2": {
+      "criterion": "Only authorized project files committed; main fast-forward receives same source tree and both checkouts clean",
+      "implementation_refs": [
+        "decisions.md"
+      ],
+      "check_refs": [
+        "http-contracts",
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    }
+  },
+  "delivery": {
+    "status": "pending-integration"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T04:18:46+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T04:19:40+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [],
+        "decisions": [
+          "User authorizes local overall acceptance, commit and merge. Reuse approved test boundaries and existing independent code reviews; no business change, no push."
+        ],
+        "acceptance": [
+          "Full configured checks pass on final integrated sources; existing A1-A7 evidence indexed with limitations",
+          "Only authorized project files committed; main fast-forward receives same source tree and both checkouts clean"
+        ],
+        "spec_ref": null,
+        "multi_session": false,
+        "grilling_status": "confirmed"
+      }
+    },
+    {
+      "at": "2026-11-13T04:19:41+00:00",
+      "event": "TRANSITION",
+      "details": {
+        "to": "EXECUTE",
+        "note": null
+      }
+    },
+    {
+      "at": "2026-11-13T04:19:41+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T04:19:42+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T04:20:44+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-121846-746294-final-local-acceptance-and-main-inte\\verification\\20261113-122044-631682.md"
+      }
+    },
+    {
+      "at": "2026-11-13T04:21:03+00:00",
+      "event": "REVIEW",
+      "details": {
+        "verdict": "pass",
+        "finding": null
+      }
+    },
+    {
+      "at": "2026-11-13T04:21:04+00:00",
+      "event": "DELIVERY_RECORDED",
+      "details": {
+        "status": "pending-integration"
+      }
+    },
+    {
+      "at": "2026-11-13T04:21:04+00:00",
+      "event": "CLOSED",
+      "details": {
+        "summary": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-121846-746294-final-local-acceptance-and-main-inte\\summary.md"
+      }
+    }
+  ]
+}

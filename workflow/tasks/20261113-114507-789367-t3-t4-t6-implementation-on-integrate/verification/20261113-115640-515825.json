@@ -1,0 +1,115 @@
+{
+  "schema_version": 2,
+  "engine_version": "1.4.0",
+  "verification_id": "20261113-115640-515825",
+  "task_id": "20261113-114507-789367-t3-t4-t6-implementation-on-integrate",
+  "run_at": "2026-11-13T03:56:40+00:00",
+  "result": "PASS",
+  "head_sha": "746edeef3f5194c440592d2e1b8fa2309fdfc9bb",
+  "dirty_fingerprint": "6fb54d43ffe4cedb9e4eb88803791b064d662acbc4d66a999734a4e15d764cdd",
+  "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+  "planning_sha256": "5f3a31bbc4eed1df2f07a84e47462a8a01614f76e4336a445d2877aad40ed446",
+  "changed_files": [
+    ".scratch/certificate-admin/issues/T3.md",
+    ".scratch/certificate-admin/issues/T4.md",
+    ".scratch/certificate-admin/issues/T6.md",
+    "README.md",
+    "backend/T3-evidence.md",
+    "backend/T4-evidence.md",
+    "backend/T6-evidence.md",
+    "backend/app/certificate_query.py",
+    "backend/app/csv_export.py",
+    "backend/app/database.py",
+    "backend/app/idempotency.py",
+    "backend/app/issuance.py",
+    "backend/app/main.py",
+    "backend/app/revocation.py",
+    "backend/tests/test_csv_export.py",
+    "backend/tests/test_idempotency.py",
+    "backend/tests/test_issuance.py",
+    "backend/tests/test_revocation.py",
+    "backend/tests/test_workflow_integration.py",
+    "frontend/src/api/certificates.ts",
+    "frontend/src/api/export.ts",
+    "frontend/src/api/issuance.ts",
+    "frontend/src/api/revocation.ts",
+    "frontend/src/components/certificates/BulkIssue.vue",
+    "frontend/src/components/certificates/CertificateDetail.vue",
+    "frontend/src/components/certificates/CertificatePage.vue",
+    "frontend/src/components/certificates/ExportCertificates.vue",
+    "frontend/src/components/certificates/RevokeCertificate.vue",
+    "frontend/src/composables/useBulkIssue.ts",
+    "frontend/src/composables/useCertificates.ts",
+    "scripts/benchmark_export.py",
+    "scripts/generate_export_fixture.py",
+    "spec.md",
+    "tasks.md",
+    "tests/browser_proxy.py",
+    "tests/test_export_stream.py"
+  ],
+  "unchanged_preexisting_dirty": [],
+  "scope_violations": [],
+  "checks": [
+    {
+      "name": "frontend-types",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 2.39,
+      "output": ""
+    },
+    {
+      "name": "frontend-build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 1.405,
+      "output": "vite v8.3.8 building client environment for production...\ntransforming...\n✓ 52 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                  0.41 kB │ gzip:  0.30 kB\ndist/assets/index-N9UpC4Ly.css   5.58 kB │ gzip:  1.75 kB\ndist/assets/index-B_uNjmyu.js   88.54 kB │ gzip: 33.39 kB\n\n✓ built in 348ms\n"
+    },
+    {
+      "name": "http-contracts",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 17.494,
+      "output": "...............................................                          [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n47 passed, 1 warning in 16.53s\n"
+    },
+    {
+      "name": "startup-smoke",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 47.532,
+      "output": "........                                                                 [100%]\n8 passed in 46.71s\n"
+    }
+  ],
+  "acceptance_coverage": {
+    "status": "covered",
+    "errors": [],
+    "pending": []
+  },
+  "verification_errors": []
+}

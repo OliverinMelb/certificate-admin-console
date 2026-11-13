@@ -1,4 +1,5 @@
 import { computed, onMounted, onScopeDispose, shallowRef } from 'vue'
+import type { AuditEvent } from '../api/certificates'
 import { get, type Actor, type Course, type Certificate, type CertificateList, type Items, type CertificateSort, type SortOrder } from '../api/certificates'
 
 // Each resource has an independent generation: even an uncancellable late response
@@ -48,6 +49,7 @@ export function useCertificates() {
   const courses = useResource<Items<Course>>(() => ({ items: [] }))
   const certificates = useResource<CertificateList>(() => ({ items: [], total: 0, page: 1, page_size: 50 }))
   const detail = useResource<Certificate | null>(() => null)
+  const audit = useResource<Items<AuditEvent>>(() => ({ items: [] }))
   const actorId = shallowRef('')
   const query = shallowRef('')
   const sort = shallowRef<CertificateSort>('serial_number')
@@ -67,6 +69,7 @@ export function useCertificates() {
   function closeDetail() {
     detailId.value = ''
     detail.clear()
+    audit.clear()
   }
   function loadList() {
     cancelDebounce()
@@ -109,10 +112,11 @@ export function useCertificates() {
     if (!actorId.value) return
     detailId.value = id
     void detail.load(`certificates/${encodeURIComponent(id)}`, actorId.value)
+    void audit.load(`certificates/${encodeURIComponent(id)}/audit`, actorId.value)
   }
   onMounted(loadActors)
   onScopeDispose(cancelDebounce)
 
-  return { actors, courses, certificates, detail, actorId, actor, query, sort, order, page, pageSize, detailId, busy,
+  return { actors, courses, certificates, detail, audit, actorId, actor, query, sort, order, page, pageSize, detailId, busy,
     selectActor, loadActors, loadCourses, loadList, search, changeSort, changeOrder, changePageSize, changePage, openDetail, closeDetail }
 }
