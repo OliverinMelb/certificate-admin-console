@@ -30,4 +30,24 @@
 
 ## 后续确认记录格式
 
+## D005 T1 已确认
+
+- 用户原话：“确认 T1 的方案、测试边界和并行分工，用我的workflow并行开发”。
+- 使用 sqlite3、X-Actor-Id、文件库、参数化查询、Vue composable 与独立原生 worktree；范围为读取隔离与默认种子数据。
+- 固定契约与文件所有权见 workflow/tasks/20261113-110650-151404-t1-tenant-isolated-certificate-brows/spec.md。T2 之后仍待确认。
+
+## D006 T1 浏览器验收
+
+- 用户原话：“T1 浏览器验收通过了，按已确认的方案用我的 workflow 并行开发 T2、T5。”
+- 来源：另一个 fork 窗口执行浏览器验收，由用户向本线程确认通过；本线程不重复浏览器操作，不声称亲自完成该轮验收。
+
+## D007 T2 与 T5 并行批准
+
+- 用户原话：“批准两项并行（含撤销后不重发）”；D006 再次授权开始。
+- T2：终身唯一证书、撤销后不重发；BEGIN IMMEDIATE + 每学员 SAVEPOINT；证书和 ISSUED 审计原子提交；逐人 issued/skipped/failed；公共审计读取接口。幂等结果重放仍属 T3。
+- T5：zoneinfo + tzdata；保留 UTC 原值，动态生成租户当地日期/时间；SQLite 受控日期函数在分页前排序，同日 id ASC；不新增日期存储列。CSV 与十万行性能仍属 T6。
+- 公共测试边界、权衡与验收见 .scratch/certificate-admin/T2-proposal.md、T5-proposal.md。独立 worktree 并行，主线程负责共享文件装配。
+
+## 记录格式
+
 每项记录需求 ID、具体决定、备选与取舍、用户确认原文或真实来源、测试边界、实施引用、验证证据与提交（存在时）。没有证据的字段标记待补，不编造。

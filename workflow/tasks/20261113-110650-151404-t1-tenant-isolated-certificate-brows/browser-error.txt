@@ -1,0 +1,47 @@
+- main:
+  - paragraph: CERTIFICATE ADMIN CONSOLE
+  - heading "证书管理后台" [level=1]
+  - paragraph: 管理培训证书，让每一次学习成果都有据可查。
+  - region "工作空间":
+    - heading "工作空间" [level=2]
+    - paragraph: 演示身份 · 仅查看所属租户的数据
+    - text: 演示管理员
+    - combobox "演示管理员":
+      - option "alice@east.test · East"
+      - option "bob@west.test · West" [selected]
+    - heading "当前租户课程" [level=3]
+    - list:
+      - listitem: Safety 101
+  - region "已颁发证书":
+    - heading "已颁发证书" [level=2]
+    - generic: West
+    - paragraph: 浏览学员证书与颁发记录。所有颁发时间均以 UTC 显示。
+    - text: 搜索证书
+    - searchbox "搜索证书" [active]: Alex
+    - text: 排序字段
+    - combobox "排序字段":
+      - option "证书编号" [selected]
+      - option "学员姓名"
+    - text: 排序方向
+    - combobox "排序方向":
+      - option "升序" [selected]
+      - option "降序"
+    - alert:
+      - paragraph: 暂时无法加载，请重试。
+      - button "重试证书列表"
+    - navigation "证书分页":
+      - text: 每页
+      - combobox "每页证书数" [disabled]:
+        - option "5" [selected]
+        - option "10"
+        - option "50"
+        - option "100"
+      - text: 条
+      - status: 共 0 条 · 第 1 / 1 页
+      - button "上一页" [disabled]
+      - button "下一页" [disabled]
+  - region "服务连接":
+    - heading "服务连接" [level=2]
+    - status:
+      - generic: 服务已连接
+    - button "重新检查"

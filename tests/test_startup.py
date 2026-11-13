@@ -102,6 +102,17 @@ def test_clean_copy_starts_from_documented_command(tmp_path):
                     assert asset.status_code == 200
                     assert "javascript" in asset.headers["content-type"]
                 assert client.get("/api/unknown").status_code == 404
+                actors = client.get("/api/actors")
+                assert actors.status_code == 200
+                assert {actor["id"] for actor in actors.json()["items"]} == {"alice", "bob"}
+                east = client.get("/api/certificates", headers={"X-Actor-Id": "alice"})
+                west = client.get("/api/certificates", headers={"X-Actor-Id": "bob"})
+                assert east.status_code == west.status_code == 200
+                initial_east = east.json()
+                initial_west = west.json()
+                assert initial_east["total"] == 12
+                assert initial_west["total"] == 4
+                assert client.get("/api/certificates/east-cert-001", headers={"X-Actor-Id": "bob"}).status_code == 404
             for name, original in locks.items():
                 assert (project / name).read_bytes() == original
         finally:
@@ -110,6 +121,9 @@ def test_clean_copy_starts_from_documented_command(tmp_path):
         process = launch(project, port, log)
         try:
             await_ready(process, url, log_path)
+            with httpx.Client(base_url=url, trust_env=False) as client:
+                assert client.get("/api/certificates", headers={"X-Actor-Id": "alice"}).json() == initial_east
+                assert client.get("/api/certificates", headers={"X-Actor-Id": "bob"}).json() == initial_west
             for name, original in locks.items():
                 assert (project / name).read_bytes() == original
         finally:
@@ -160,6 +174,8 @@ def test_occupied_port_is_preserved_and_startup_fails(tmp_path):
                     connection.close()
             finally:
                 stop(process)
+
+        assert "Fatal Python error" not in (tmp_path / "occupied.log").read_text(encoding="utf-8")
 
 
 def test_outdated_lock_fails_without_starting_service(tmp_path):

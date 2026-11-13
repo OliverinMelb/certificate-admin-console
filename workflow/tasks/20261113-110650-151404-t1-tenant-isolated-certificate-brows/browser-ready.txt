@@ -1,0 +1,91 @@
+- main:
+  - paragraph: CERTIFICATE ADMIN CONSOLE
+  - heading "证书管理后台" [level=1]
+  - paragraph: 管理培训证书，让每一次学习成果都有据可查。
+  - region "工作空间":
+    - heading "工作空间" [level=2]
+    - paragraph: 演示身份 · 仅查看所属租户的数据
+    - text: 演示管理员
+    - combobox "演示管理员":
+      - option "alice@east.test · East"
+      - option "bob@west.test · West" [selected]
+    - heading "当前租户课程" [level=3]
+    - list:
+      - listitem: Safety 101
+  - region "已颁发证书":
+    - heading "已颁发证书" [level=2]
+    - generic: West
+    - paragraph: 浏览学员证书与颁发记录。所有颁发时间均以 UTC 显示。
+    - text: 搜索证书
+    - searchbox "搜索证书"
+    - text: 排序字段
+    - combobox "排序字段":
+      - option "证书编号" [selected]
+      - option "学员姓名"
+    - text: 排序方向
+    - combobox "排序方向":
+      - option "升序" [selected]
+      - option "降序"
+    - region "证书列表，可横向滚动":
+      - table:
+        - rowgroup:
+          - row "证书编号 学员 课程 颁发时间（UTC） 状态 详情":
+            - columnheader "证书编号"
+            - columnheader "学员"
+            - columnheader "课程"
+            - columnheader "颁发时间（UTC）"
+            - columnheader "状态"
+            - columnheader "详情"
+        - rowgroup:
+          - row "WEST-001 Alex Lee Safety 101 2026-01-10 13:30:00 UTC 有效 查看证书 WEST-001 的详情":
+            - cell "WEST-001"
+            - cell "Alex Lee"
+            - cell "Safety 101"
+            - cell "2026-01-10 13:30:00 UTC"
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 WEST-001 的详情":
+              - button "查看证书 WEST-001 的详情": 查看详情
+          - row "WEST-002 Alex Lee Safety 101 2026-01-10 13:30:00 UTC 有效 查看证书 WEST-002 的详情":
+            - cell "WEST-002"
+            - cell "Alex Lee"
+            - cell "Safety 101"
+            - cell "2026-01-10 13:30:00 UTC"
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 WEST-002 的详情":
+              - button "查看证书 WEST-002 的详情": 查看详情
+          - row "WEST-003 Case 100%_\\ Complete Safety 101 2026-01-10 13:30:00 UTC 有效 查看证书 WEST-003 的详情":
+            - cell "WEST-003"
+            - cell "Case 100%_\\ Complete"
+            - cell "Safety 101"
+            - cell "2026-01-10 13:30:00 UTC"
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 WEST-003 的详情":
+              - button "查看证书 WEST-003 的详情": 查看详情
+          - row "WEST-004 Learner 004 Safety 101 2026-01-10 13:30:00 UTC 有效 查看证书 WEST-004 的详情":
+            - cell "WEST-004"
+            - cell "Learner 004"
+            - cell "Safety 101"
+            - cell "2026-01-10 13:30:00 UTC"
+            - cell "有效":
+              - generic: 有效
+            - cell "查看证书 WEST-004 的详情":
+              - button "查看证书 WEST-004 的详情": 查看详情
+    - navigation "证书分页":
+      - text: 每页
+      - combobox "每页证书数":
+        - option "5" [selected]
+        - option "10"
+        - option "50"
+        - option "100"
+      - text: 条
+      - status: 共 4 条 · 第 1 / 1 页
+      - button "上一页" [disabled]
+      - button "下一页" [disabled]
+  - region "服务连接":
+    - heading "服务连接" [level=2]
+    - status:
+      - generic: 服务已连接
+    - button "重新检查"

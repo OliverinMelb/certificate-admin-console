@@ -1,0 +1,284 @@
+{
+  "schema_version": 3,
+  "engine_version": "1.4.0",
+  "task_id": "20261113-110650-151404-t1-tenant-isolated-certificate-brows",
+  "title": "T1 Tenant isolated certificate browsing",
+  "tier": "contract",
+  "workflow_class": "app-change",
+  "state": "REVIEW",
+  "created_at": "2026-11-13T03:06:50+00:00",
+  "updated_at": "2026-11-13T03:20:35+00:00",
+  "workspace": {
+    "kind": "linked-worktree",
+    "branch": null,
+    "detached": true,
+    "head_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd",
+    "dirty_fingerprint": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "dirty_entries": [],
+    "base_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd"
+  },
+  "scope": {
+    "owned_paths": [
+      ".scratch",
+      "backend",
+      "decisions.md",
+      "frontend",
+      "README.md",
+      "scripts",
+      "tasks.md",
+      "tests",
+      "workflow"
+    ]
+  },
+  "cognitive_routing": {
+    "skills": [
+      "grilling",
+      "tdd",
+      "vue-best-practices"
+    ],
+    "source_refs": [
+      ".scratch/certificate-admin/T1-proposal.md"
+    ],
+    "notes": []
+  },
+  "delegation": {
+    "subagent_limit": "runtime",
+    "parallel_write_isolation": "dedicated-worktree",
+    "writers": [
+      {
+        "writer_id": "backend",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-backend\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd",
+        "owned_paths": [
+          "backend"
+        ],
+        "integration_order": 1
+      },
+      {
+        "writer_id": "frontend",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-frontend\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd",
+        "owned_paths": [
+          "frontend"
+        ],
+        "integration_order": 2
+      }
+    ]
+  },
+  "planning": {
+    "status": "ready",
+    "grilling_status": "confirmed",
+    "unresolved_decisions": [],
+    "decisions": [
+      "User confirmed T1 proposal, public test seams and parallel ownership; concrete API fields recorded for coordination."
+    ],
+    "acceptance_criteria": [
+      "AC1 identity and tenant isolation via real HTTP with file SQLite.",
+      "AC2 literal search, pagination, parameter validation and stable ordering.",
+      "AC3 persistent isolated database and idempotent non-overwriting seed.",
+      "AC4 real browser identity, search, pagination, detail, loading/empty/error and stale response protection.",
+      "AC5 one-command seeded startup and T0 regression checks."
+    ],
+    "spec_ref": "workflow/tasks/20261113-110650-151404-t1-tenant-isolated-certificate-brows/spec.md",
+    "multi_session": false,
+    "tickets": []
+  },
+  "budget": {
+    "max_fix_loops": 2,
+    "fix_loops": 0,
+    "verification_attempts": 1
+  },
+  "verification": {
+    "latest": {
+      "result": "PASS",
+      "verification_id": "20261113-112035-169074",
+      "head_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd",
+      "dirty_fingerprint": "c198a93bc7d78390c221dde2714232fe1aae83dd53ce7623f12097f4e6bd1e05",
+      "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+      "planning_sha256": "ec2edb8c541ef80e931ffae27a8634551548b775e9c07a12ef684d942cda7fab",
+      "evidence": "workflow/tasks/20261113-110650-151404-t1-tenant-isolated-certificate-brows/verification/20261113-112035-169074.md",
+      "acceptance_coverage": {
+        "status": "covered",
+        "errors": [],
+        "pending": []
+      }
+    }
+  },
+  "acceptance_evidence": {
+    "AC-1": {
+      "criterion": "AC1 identity and tenant isolation via real HTTP with file SQLite.",
+      "implementation_refs": [
+        "backend/app/main.py"
+      ],
+      "check_refs": [
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-2": {
+      "criterion": "AC2 literal search, pagination, parameter validation and stable ordering.",
+      "implementation_refs": [
+        "backend/app/main.py"
+      ],
+      "check_refs": [
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-3": {
+      "criterion": "AC3 persistent isolated database and idempotent non-overwriting seed.",
+      "implementation_refs": [
+        "backend/app/database.py"
+      ],
+      "check_refs": [
+        "http-contracts",
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    },
+    "AC-4": {
+      "criterion": "AC4 real browser identity, search, pagination, detail, loading/empty/error and stale response protection.",
+      "implementation_refs": [
+        "frontend/src/composables/useCertificates.ts",
+        "workflow/tasks/20261113-110650-151404-t1-tenant-isolated-certificate-brows/evidence.md"
+      ],
+      "check_refs": [
+        "frontend-types",
+        "frontend-build",
+        "http-contracts"
+      ],
+      "pending_reason": null
+    },
+    "AC-5": {
+      "criterion": "AC5 one-command seeded startup and T0 regression checks.",
+      "implementation_refs": [
+        "tests/test_startup.py"
+      ],
+      "check_refs": [
+        "startup-smoke"
+      ],
+      "pending_reason": null
+    }
+  },
+  "delivery": {
+    "status": "development-complete"
+  },
+  "history": [
+    {
+      "at": "2026-11-13T03:06:50+00:00",
+      "event": "TASK_STARTED",
+      "details": null
+    },
+    {
+      "at": "2026-11-13T03:07:54+00:00",
+      "event": "WRITER_ASSIGNED",
+      "details": {
+        "writer_id": "backend",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-backend\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd",
+        "owned_paths": [
+          "backend"
+        ],
+        "integration_order": 1
+      }
+    },
+    {
+      "at": "2026-11-13T03:07:54+00:00",
+      "event": "WRITER_ASSIGNED",
+      "details": {
+        "writer_id": "frontend",
+        "worktree_path": "C:\\Users\\admin\\.codex\\worktrees\\certificate-frontend\\certificate-admin-console",
+        "workspace_kind": "linked-worktree",
+        "branch": null,
+        "detached": true,
+        "base_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd",
+        "owned_paths": [
+          "frontend"
+        ],
+        "integration_order": 2
+      }
+    },
+    {
+      "at": "2026-11-13T03:07:55+00:00",
+      "event": "PLAN_UPDATED",
+      "details": {
+        "status": "ready",
+        "opened": [],
+        "resolved": [],
+        "decisions": [
+          "User confirmed T1 proposal, public test seams and parallel ownership; concrete API fields recorded for coordination."
+        ],
+        "acceptance": [
+          "AC1 identity and tenant isolation via real HTTP with file SQLite.",
+          "AC2 literal search, pagination, parameter validation and stable ordering.",
+          "AC3 persistent isolated database and idempotent non-overwriting seed.",
+          "AC4 real browser identity, search, pagination, detail, loading/empty/error and stale response protection.",
+          "AC5 one-command seeded startup and T0 regression checks."
+        ],
+        "spec_ref": "workflow/tasks/20261113-110650-151404-t1-tenant-isolated-certificate-brows/spec.md",
+        "multi_session": false,
+        "grilling_status": "confirmed"
+      }
+    },
+    {
+      "at": "2026-11-13T03:07:55+00:00",
+      "event": "TRANSITION",
+      "details": {
+        "to": "EXECUTE",
+        "note": null
+      }
+    },
+    {
+      "at": "2026-11-13T03:19:46+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-1"
+      }
+    },
+    {
+      "at": "2026-11-13T03:19:47+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-2"
+      }
+    },
+    {
+      "at": "2026-11-13T03:19:49+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-3"
+      }
+    },
+    {
+      "at": "2026-11-13T03:19:49+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-4"
+      }
+    },
+    {
+      "at": "2026-11-13T03:19:51+00:00",
+      "event": "ACCEPTANCE_RECORDED",
+      "details": {
+        "id": "AC-5"
+      }
+    },
+    {
+      "at": "2026-11-13T03:20:35+00:00",
+      "event": "VERIFIED",
+      "details": {
+        "result": "PASS",
+        "evidence": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\workflow\\tasks\\20261113-110650-151404-t1-tenant-isolated-certificate-brows\\verification\\20261113-112035-169074.md"
+      }
+    }
+  ]
+}

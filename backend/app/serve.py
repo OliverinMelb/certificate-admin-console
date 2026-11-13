@@ -1,6 +1,7 @@
 """Run Uvicorn with a lifetime bounded by the launcher's stdin pipe."""
 
 import argparse
+import os
 import sys
 import threading
 
@@ -17,7 +18,9 @@ def main() -> None:
 
     def watch_launcher() -> None:
         # The launcher never sends data. EOF also occurs if it is forcibly killed.
-        sys.stdin.buffer.read()
+        # Avoid holding BufferedReader's lock during interpreter shutdown on bind failure.
+        while os.read(sys.stdin.fileno(), 1):
+            pass
         server.should_exit = True
 
     if not sys.stdin.isatty():

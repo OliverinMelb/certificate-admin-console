@@ -1,0 +1,105 @@
+{
+  "schema_version": 2,
+  "engine_version": "1.4.0",
+  "verification_id": "20261113-112035-169074",
+  "task_id": "20261113-110650-151404-t1-tenant-isolated-certificate-brows",
+  "run_at": "2026-11-13T03:20:35+00:00",
+  "result": "PASS",
+  "head_sha": "a9ee16346692aee0d5ca47362909bc9f41b28edd",
+  "dirty_fingerprint": "c198a93bc7d78390c221dde2714232fe1aae83dd53ce7623f12097f4e6bd1e05",
+  "config_sha256": "6a6f35fc46ce15a320da249598e2e64a0068b65db41de5dd0d669f30cb71ad87",
+  "planning_sha256": "ec2edb8c541ef80e931ffae27a8634551548b775e9c07a12ef684d942cda7fab",
+  "changed_files": [
+    ".scratch/certificate-admin/T1-proposal.md",
+    ".scratch/certificate-admin/T2-proposal.md",
+    ".scratch/certificate-admin/T5-proposal.md",
+    ".scratch/certificate-admin/issues/T1.md",
+    "README.md",
+    "backend/T1-evidence.md",
+    "backend/app/database.py",
+    "backend/app/main.py",
+    "backend/app/serve.py",
+    "backend/tests/test_certificates.py",
+    "backend/tests/test_http.py",
+    "decisions.md",
+    "frontend/T1-evidence.md",
+    "frontend/src/App.vue",
+    "frontend/src/api/certificates.ts",
+    "frontend/src/components/certificates/ActorSelect.vue",
+    "frontend/src/components/certificates/CertificateDetail.vue",
+    "frontend/src/components/certificates/CertificateFilters.vue",
+    "frontend/src/components/certificates/CertificatePage.vue",
+    "frontend/src/components/certificates/CertificatePagination.vue",
+    "frontend/src/components/certificates/CertificateTable.vue",
+    "frontend/src/composables/useCertificates.ts",
+    "frontend/src/style.css",
+    "tasks.md",
+    "tests/browser_proxy.py",
+    "tests/test_startup.py"
+  ],
+  "unchanged_preexisting_dirty": [],
+  "scope_violations": [],
+  "checks": [
+    {
+      "name": "frontend-types",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 1.279,
+      "output": ""
+    },
+    {
+      "name": "frontend-build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\frontend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 0.654,
+      "output": "vite v8.3.8 building client environment for production...\ntransforming...\n✓ 37 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                  0.41 kB │ gzip:  0.30 kB\ndist/assets/index-It7CvP6b.css   4.61 kB │ gzip:  1.52 kB\ndist/assets/index-Xasds23h.js   78.25 kB │ gzip: 30.31 kB\n\n✓ built in 250ms\n"
+    },
+    {
+      "name": "http-contracts",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 2.024,
+      "output": "............                                                             [100%]\n============================== warnings summary ===============================\n.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n12 passed, 1 warning in 1.02s\n"
+    },
+    {
+      "name": "startup-smoke",
+      "command": [
+        "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console\\backend\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tests",
+        "-q"
+      ],
+      "dir": "C:\\Users\\admin\\.codex\\worktrees\\certificate-verification\\certificate-admin-console",
+      "status": "PASS",
+      "returncode": 0,
+      "duration_seconds": 38.472,
+      "output": "....                                                                     [100%]\n4 passed in 37.49s\n"
+    }
+  ],
+  "acceptance_coverage": {
+    "status": "covered",
+    "errors": [],
+    "pending": []
+  },
+  "verification_errors": []
+}

@@ -67,6 +67,14 @@
 
 ## 关键待决策事项
 
+### 已批准的 T2 / T5 契约（2026-11-13）
+
+- T2：同一租户/课程/学员终身最多一张证书，撤销后不重发；数据库唯一约束防重。批量写事务及每学员 SAVEPOINT 确保证书与 ISSUED 审计一起提交；基础设施失败回滚整批。逐人返回 issued/skipped/failed 与原因；新增 GET /api/certificates/{id}/audit，沿用租户隔离。幂等 key 结果重放属于 T3，T2 不宣称 A2 完成。
+- T5：UTC issued_at 保持原值，zoneinfo + tzdata 根据服务端租户生成 issued_local_date、issued_local_datetime、timezone。SQLite 自定义日期函数在分页前按租户日历日排序，同日 id ASC；不新增当地日期存储列。列表和详情展示服务端时间，未知时区明确失败。CSV 及十万行性能留到 T6。
+- 两项均在 T1 后执行，可以并行；测试通过真实 HTTP + 文件 SQLite、浏览器可见交互观察，具体测试范围见已批准的 T2-proposal.md、T5-proposal.md。
+
+### 其余待决策事项
+
 - 幂等作用域建议为 tenant + actor + operation type + key；规范化请求包含课程和实际语义字段，拒绝无法识别字段。
 - 建议同一租户、课程、学员终身最多一张证书，本版本不支持撤销后重发；这是业务假设，必须确认。
 - 建议批量操作、证书与审计在同一事务提交；逐学员可恢复失败与整批基础设施失败分开处理。

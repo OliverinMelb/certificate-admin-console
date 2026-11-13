@@ -7,5 +7,14 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; }
-button { font: inherit; }
-button:focus-visible { outline: 3px solid #6b99e6; outline-offset: 4px; }
+button, input, select { font: inherit; }
+button { background: white; color: #153e56; border: 1px solid #c5d3dd; border-radius: 7px; padding: 7px 12px; cursor: pointer; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+input, select { background: white; color: #172b3a; border: 1px solid #b9cbd7; border-radius: 7px; padding: 9px 12px; min-width: 0; }
+button:focus-visible, input:focus-visible, select:focus-visible, [tabindex]:focus-visible { outline: 3px solid #6b99e6; outline-offset: 3px; }
+.panel { background: white; border: 1px solid #dbe3e9; border-radius: 14px; padding: 24px; }
+.section-title { margin: 0; font-size: 20px; }
+.muted { color: #526575; font-size: 14px; }
+.error { color: #a3382c; }
+.field { display: flex; flex-direction: column; gap: 7px; font-size: 14px; font-weight: 600; }
+@media (max-width: 600px) { .panel { padding: 18px; } }
